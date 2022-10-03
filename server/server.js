@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql');
 const jsSHA = require('jssha');
+const fileUpload = require('express-fileupload');
 
 /* const server = http.createServer(function(req,res){
   res.write('Hello node')
@@ -30,6 +31,7 @@ const { query } = require('express');
 app.use(bodyParser.json())
 app.use(cors());
 app.use(express.static(path.join(__dirname,'build')));
+app.use(fileUpload())
 app.use((req,res,next)=>{
   res.setHeader('Access-Control-Allow-Origin','*');
   res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE');
@@ -60,10 +62,26 @@ const router = require('./routes/router.js');
 app.use('/api', router);
 
 app.post('/save_card',(req,res)=>{
-  //console.log(req.body.imgSrc)
+  let src;
+  if(req.body.imgSrc.startsWith('http')) src = req.body.imgSrc
+  else{
+    try {
+      const image = req.files.imgFile
+      const uploadPath =  __dirname+'/../dnd_website/public/assets/images/'+image.name
+      console.log(uploadPath)
+      // src = uploadPath
+      src = './assets/images/'+image.name
+      image.mv(uploadPath,(err) => {
+        if(err) return res.status(500).send(err)
+        // res.send('File uploaded')
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   try {
     connection.query(`INSERT INTO card ${insertSequenceCard} VALUES (?,?,?,?,?,?,?);`,
-    [req.body.name, req.body.rank,req.body.ecology,req.body.strenght,req.body.weakness,req.body.imgSrc,req.body.keyword],function (errors,rows,fields){
+    [req.body.name, req.body.rank,req.body.ecology,req.body.strenght,req.body.weakness,src,req.body.keyword],function (errors,rows,fields){
       if(!!errors){
         console.error('Error in the query',errors)
         res.status(400).send(errors)
@@ -147,9 +165,10 @@ app.post('/login',(req,res) => {
   }
 })
 
-app.post('/get-cards',(req,res) => {
+app.get('/get-cards',(req,res) => {
   try {
-    connection.query('SELECT * FROM card',function(errors,rows,fields) {
+    console.log(req.query)
+    connection.query(`SELECT * FROM card ORDER BY id LIMIT ${req.query.limit} OFFSET ${req.query.offset}`,function(errors,rows,fields) {
       if(!!errors){
         console.error('Error in the query ',errors)
         res.status(400).send(errors)

@@ -39,8 +39,8 @@ const Login = (props) => {
             localStorage.setItem('loggedIn',true)
             localStorage.setItem('iconSrc',res.data.user.icon)
             localStorage.setItem('username',res.data.user.username)
-            localStorage.setItem('jwt_token',res.data.token)
           }
+          localStorage.setItem('jwt_token',res.data.token)
           props.setUserIcon(res.data.user.icon)
           navigate('/')
         } 

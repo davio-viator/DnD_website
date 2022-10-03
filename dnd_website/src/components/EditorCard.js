@@ -37,7 +37,12 @@ const EditorCard = (props) =>{
 
     function saveInfo(){
       // console.log(props.item);
-      Axios.post('http://localhost:3030/save_card',props.item)
+      let formData = new FormData()
+      for(let item in props.item){
+        formData.append(item,props.item[item])
+      }
+      formData.append('imgFile',props.imgFile)
+      Axios.post('http://localhost:3030/save_card',formData)
       .then(res=>{
         console.log(res)
         console.log(props.item);

@@ -4,33 +4,46 @@ import Card from '../components/Card';
 
 import Axios from 'axios';
 
-let cardsArray = []
 
 const Cards = (props) => {
-
+  
   const [gotCards,setGotCards] = useState(false)
   
+  let offset = 0
+  const [cards,setCards] = useState([])
 
   function getCards(){
-    setGotCards(false)
-    Axios.post('http://localhost:3030/get-cards')
+    // setGotCards(false)
+    Axios.get(`http://localhost:3030/get-cards?limit=6&offset=${offset}`)
       .then(res => {
-        for (let i = 0; i < res.data.length; i++) {
-          cardsArray[i] = res.data[i]
-        }
-        setGotCards(true)
+        const cardsArray = []
+        res.data.forEach((card,index)=>  cardsArray[index] = card)
+        setCards(oldCards => [...oldCards,...cardsArray])
+        // console.log(res.data,cardsArray);
+        // setGotCards(true)
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       })
+      offset+=6      
   }
 
+  const  handleScroll = (e) => {
+    let winHeight = window.innerHeight;
+    let scroll = e.target.documentElement.scrollTop
+    let height = e.target.documentElement.scrollHeight
+    if(winHeight+scroll >= height && scroll > 100){
+      console.log('at the bottom of the page');
+      getCards()
+    }
+  }
   useEffect(()=>{
+    window.addEventListener('scroll',handleScroll)
     getCards()
   },[])
 
   function createCard(){
-    return cardsArray.map((item,index) => {
+    return cards.map((item,index) => {
       return(
         <Card key={index} 
         className="cards-container-child"
@@ -47,7 +60,7 @@ const Cards = (props) => {
 
   return(
     <div className='cards-container ps-5 ms-5 mb-5'>
-     {gotCards?createCard():null}
+     {createCard()}
     </div>
   )
 

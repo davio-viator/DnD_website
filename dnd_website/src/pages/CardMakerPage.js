@@ -1,4 +1,4 @@
-import React,{  useState } from "react";
+import React,{  useEffect, useState } from "react";
 import randomWord from 'random-words';
 
 import Card from "../components/Card";
@@ -25,9 +25,10 @@ const CardMakerPage = (props) =>{
     imgSrc:'https://i.pinimg.com/originals/ba/a2/7a/baa27a58a45aae675b89c5b8b59b056c.png',
     keyword: randomWord({min:2 , max:5, join: ','})
   }; 
-    
+
   const [items, setItems] = useState(initialValues);  
-  const [initialized, setInitialized] = useState(true)
+  // const [initialized, setInitialized] = useState(true)
+  const [file,setFile] = useState(null)
 
   const ranks = {
     '-1':'∅',
@@ -76,12 +77,14 @@ function handleImagesChange (imgsrc,e) {
           if(imgsrc.size<1500000){
             // localStorage.getItem("usrIcon")    // return new object jasper object
             setItems({...items,imgSrc: localStorage.getItem("usrIcon")});
+            setFile(imgsrc)
           }else{
             setItems({...items,imgSrc:NoThumbnail})
           }
       }else{
           alert('File was too big try using a link instead');
       }
+      // localStorage.removeItem("usrIcon",this.result);
       console.log(this.result.substring(0,30))
     });
     reader.readAsDataURL(e.target.files[0]);  
@@ -141,12 +144,12 @@ function handleNameChange (e) {
     }else{
       setItems({...items,imgSrc:'https://i.pinimg.com/originals/ba/a2/7a/baa27a58a45aae675b89c5b8b59b056c.png'})
     }
-    setInitialized(false);
+    // setInitialized(false);
   }
 
-  if(initialized) {
+  useEffect(() =>{
     initializePicture()
-  }
+  },[])
   /* const addMoreItems = () =>{
     setItems(prevItems => [...prevItems, {
       id: prevItems.length,
@@ -160,7 +163,7 @@ function handleNameChange (e) {
       <Container className="mt-5">   
         <Row> 
           <Col>
-            <EditorCard item={items}/>         
+            <EditorCard imgFile={file} item={items}/>         
           </Col>
           <Col>
               <Form>

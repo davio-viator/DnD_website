@@ -110,7 +110,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.post('/verify-login',userMiddleware.isLoggedIn,(req,res,next)=>{
-  console.log(req.userData,'test');
+  // console.log(req.userData);
   res.status(200).send({isLoggedIn:true});
 })
 

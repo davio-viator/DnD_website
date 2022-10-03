@@ -46,8 +46,8 @@ const Characters = (props) => {
     return Math.floor(Math.random() * (max - min +1 ))+min
   }
 
-  function initalizeArray(){
-    charsArray = []
+  function initializeArray(){
+    // charsArray = []
     for(let i =0; i < 15; i++){
       charsArray.push({name:randomWord(),level:random(),race:races[randomMinMax(0,races.length-1)],class:'Cleric/Life Domain'})
     }
@@ -64,14 +64,19 @@ const Characters = (props) => {
     });
   }
 
+  function handleScroll(e) {
+    console.log('hi')
+  }
+
   useEffect(()=>{
     // createCard()
+    window.addEventListener('scroll',handleScroll)
   },[])
-
+  
+  initializeArray()
   let values = {name:'Odof',level:'5',race:'Dragonborn',class:'Cleric/Life Domain'}
 
-  initalizeArray()
-
+  
   return(
     <Container fluid={false}>
       <div className='mt-5 d-flex justify-content-between fs-5'>
