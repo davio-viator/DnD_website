@@ -26,3 +26,5 @@ yarn-error.log*
 **/assets/images
 
 **.ini
+
+**.sql

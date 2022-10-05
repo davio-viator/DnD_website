@@ -368,6 +368,7 @@ svg{
 }
 
 .d-card-image2{
+  border-radius: 0 0 0 0 !important;
   width:25rem;
   /*width:16rem;*/
   height:30rem;
@@ -537,6 +538,16 @@ ul.ba {
   box-shadow: inset 0 0 15px #EC98BC;
 }
 
+.alter-scroll-bar::-webkit-scrollbar{
+  width: .25rem !important;
+  height: .25rem !important;
+}
+
+.alter-scroll-bar::-webkit-scrollbar-track{
+  background:#F7d4dc !important;
+  box-shadow: inset 0 0 15px #EC98BC !important;
+}
+
 .graybg::-webkit-scrollbar-thumb{
   background: #341c09;
 }
@@ -568,19 +579,21 @@ ul.ba {
   background: #251304;
 }
 
-.top-round{
-  border-radius: 5px 5px 0 0;
-}
-.bottom-round{
-  border-radius:0 0 5px 5px ;
-}
-
 .texte{
   background-color: #fdf5e0 !important;
   font-weight: bold !important;
   border-radius: 0 0 0 0 !important;
   border:0px solid black !important;
+  color: black;
 }
+
+.top-round{
+  border-radius: 5px 5px 0 0;
+}
+.bottom-round{
+  border-radius:0 0 5px 5px !important;
+}
+
 
 .width70{
   width:70% !important;
@@ -666,6 +679,9 @@ ul.ba {
 }
 
 .buttons{
+  /* position: relative; */
+  /* top: 0; */
+  
   display: flex !important;
 }
 
@@ -764,6 +780,10 @@ ul.ba {
   height: 4em;
 }
 
+.card-bottom-height-bs{
+  height: 3.8em;
+}
+
 .form-header{
   height:3em;
   padding-top: 0.7em;
@@ -825,7 +845,7 @@ nav ul, nav ol {
 
 .banner{
   position: relative;
-  background-color: #26282A;
+  background-color: #4a5b6d;
   width: 100%;
   /* height: 50px; */
 }
@@ -868,7 +888,7 @@ nav ul, nav ol {
   align-items: center;
   font-family: Roboto,Helvetica,sans-serif;
   font-size: 15px;
-  color: #a5afba;
+  color: #d0d9e2;
   height: 50px;
   padding: 0 15px;
   user-select: none;
@@ -880,18 +900,18 @@ nav ul, nav ol {
   align-items: center;
   font-family: Roboto,Helvetica,sans-serif;
   font-size: 15px;
-  color: #d6dfe7;
+  color: #ffffff;
   height: 50px;
   padding: 0 15px;
   user-select: none;
 }
 
 .main-page-menu-item-label::after{
-  top: -9.5%;
+  top: -10.3%;
   transform: translateY(-50%); 
   position: relative;
   /* right: 6px; */
-  right: 2px;
+  right: 0px;
   rotate: 180deg;
   content: "";
   display: inline-block;
@@ -913,7 +933,7 @@ nav ul, nav ol {
   rotate: 0deg;
   content: "";
   display: inline-block;
-  height: 0;
+  height: 0px;
   vertical-align: baseline;
   width: 0;
   border-left: 6px solid #fff;

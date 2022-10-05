@@ -3,6 +3,8 @@ import { React } from "react";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+
 
 const RearCard = (props) => {
 
@@ -44,7 +46,7 @@ function handleWeakness(){
 }
 
   return(
-    <div className="d-inline-block d-card rearCard2 top-round w25rem">
+    <div className="d-inline-block d-card rearCard2 top-round w25rem bottom-round">
       <Row>
         <Col className="ligne top-round">
           <h3 className="gauche ps-2">Ecology</h3>
@@ -60,9 +62,27 @@ function handleWeakness(){
       <Row>
         <Col className="bottom-round">
           <h3 className="gauche ps-2">Weakness</h3>
-          <Form.Control className="case texte" value={handleWeakness()} as="textarea" rows={6} readOnly/>
+          <Form.Control className="case bottom-round texte " value={handleWeakness()} as="textarea" rows={6} readOnly/>
         </Col>
       </Row>
+      {/* <Card bg='dark' variant='Dark' key='Dark' text="light">
+        <Card.Header>
+          <Card.Title >Ecology</Card.Title>
+        </Card.Header>
+        <Card.Subtitle text="dark" className="case texte ps-3 pe-3 pb-2 overflow">
+          {props.values.ecology}
+        </Card.Subtitle>
+
+        <Card.Header>
+          <Card.Title >Strenght</Card.Title>
+        </Card.Header>
+        <Form.Control className="case texte" value={handleStrenght()} as="textarea" rows={6} readOnly/>
+
+        <Card.Header>
+          <Card.Title >Weakness</Card.Title>
+        </Card.Header>
+        <Form.Control className="case texte" value={handleWeakness()} as="textarea" rows={6} readOnly/>
+      </Card> */}
     </div>
   )
 }

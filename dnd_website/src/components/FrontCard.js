@@ -3,6 +3,8 @@ import Col from "react-bootstrap/esm/Col";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 
+import Card from 'react-bootstrap/Card';
+
 const FrontCard = (props) => {
 
   function capitalize(word){
@@ -19,10 +21,19 @@ const FrontCard = (props) => {
     })
   }
 
+  function handleKeyWord2(){
+    let string = props.values.keywords+""
+    let array = string.split(",")
+    return array.map((item,index)=>{
+        return (  
+            <li style={{display:'inline-block',padding:'0 0.5rem',textAlign:'center'}} className='t-center card-font-size pb-1' key={index}>{capitalize(item)} </li>
+        )
+    })
+  }
+
   return(
     <div className="d-inline-block d-card  w25rem">
-      {/* <p>FrontCard</p> */}
-      <div className="graybg2 top-round">
+      {/* <div className="graybg2 top-round">
         <h4 className="gauche ps-3 pt-2">{props.values.name}</h4>
         <h4 className="droite pe-3 pt-2">{props.values.rank}</h4>
       </div>
@@ -31,7 +42,19 @@ const FrontCard = (props) => {
           <Row className="w25rem">
               {handleKeyWord1()}
           </Row>   
-      </Container>
+      </Container> */}
+      <Card bg='dark' variant='Dark' key='Dark' text="light">
+        <Card.Header className="d-flex justify-content-between">
+          <Card.Title>{props.values.name}</Card.Title>
+          <Card.Title>{props.values.rank}</Card.Title>
+        </Card.Header>
+        <Card.Img style={{backgroundColor:'white'}} className="d-card-image2" src={props.values.iconSrc}></Card.Img>
+        <Card.Footer className="card-bottom-height-bs overflowAuto alter-scroll-bar">
+          <ul  style={{listStyle:'none',paddingInlineStart: '0px',marginBottom:'5px',marginBottom:'-2px'}}>
+            {handleKeyWord2()}
+          </ul>
+        </Card.Footer>
+      </Card>
     </div>
   )
 }

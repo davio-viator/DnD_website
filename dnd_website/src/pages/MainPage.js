@@ -1,6 +1,6 @@
 import React from 'react'; 
 
-import NavBar from '../components/NavBar';
+import NavBarComponent from '../components/NavBarComponent';
 
 import Axios from 'axios';
 
@@ -10,7 +10,7 @@ const MainPage = () => {
 
   return(
     <div>
-      <NavBar links={['Characters', 'Deck', 'Cards' ,'Notes','Games' ,]}/>
+      {/* <NavBarComponent links={['Characters', 'Deck', 'Cards' ,'Notes','Games' ,]}/> */}
       {/* MainPage works !!! */}
     </div>
   )

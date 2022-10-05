@@ -24,6 +24,8 @@ import Axios from 'axios';
 
 import UserIcon from './assets/images/user-icon.png'
 
+import NavBarComponent from './components/NavBarComponent';
+
 
 function App() {
 
@@ -41,6 +43,7 @@ function App() {
       .then(res =>{
         isLoggedIn = true
         setLoggedIn(true)
+
         
       }).catch(err=>{
         setLoggedIn(false)
@@ -57,7 +60,8 @@ function App() {
   }
 
   
-  const iconSrc = sessionStorage.getItem('iconSrc')? sessionStorage.getItem('iconSrc'):UserIcon
+  // const iconSrc = sessionStorage.getItem('iconSrc')? sessionStorage.getItem('iconSrc'):UserIcon
+  const iconSrc = localStorage.getItem('iconSrc')? localStorage.getItem('iconSrc'):UserIcon
   // const [loggedIn,setLoggedIn] = useState(sessionStorage.getItem('loggedIn'));
   const [loggedIn,setLoggedIn] = useState(getLoggedIn());
   const [userIcon,setUserIcon] = useState(iconSrc)
@@ -68,7 +72,7 @@ function App() {
     <Router>    
       <Container className='p-0' fluid={true}>
 
-        <NavBar className='border-bottom ' bg='dark' expand='lg'>
+        <NavBar className='' bg='dark' expand='lg'>
           <NavBar.Brand className="menulink ps-3">Davio Viator</NavBar.Brand> 
 
             <NavBar.Toggle className="boarder-0" aria-controls="navbar-toggle"/>
@@ -77,7 +81,7 @@ function App() {
                 <Link className="nav-link menulink" to="/mainpage">Main Page</Link>
                 {loggedIn?<Link className="nav-link menulink" to="/card-editor">Card Editor</Link>:null}
                 <Link className="nav-link menulink" to="/registration">Registration</Link>
-                {loggedIn?<Link className="nav-link menulink" to="/user">{sessionStorage.getItem('username')}</Link>:null}
+                {loggedIn?<Link className="nav-link menulink" to="/user">{localStorage.getItem('username')}</Link>:null}
                 {!loggedIn?<Link className="nav-link menulink" to="/login">Login</Link>:<Link className="nav-link menulink" to="/logout">Logout</Link>}
                 {loggedIn?<Image className='user-icon-nav-bar ps-2 pe-2 pt-2 pb-2' src={userIcon} fluid={true} roundedCircle={true} ></Image>:null}
                 {/* <Link className="nav-link menulink" to="/create">create</Link> */}
@@ -87,6 +91,7 @@ function App() {
 
             </NavBar.Collapse>
         </NavBar>
+        <NavBarComponent links={['Characters', 'Deck', 'Cards' ,'Notes','Games' ,]}/>
         <Routes>
           <Route path='/mainpage' exact element={<MainPage /> }/>
           <Route path='/' exact element={<MainPage/> }/>

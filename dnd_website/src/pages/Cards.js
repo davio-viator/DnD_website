@@ -4,8 +4,9 @@ import Card from '../components/Card';
 
 import Axios from 'axios';
 
-
 const Cards = (props) => {
+
+  var newCard = [];
   
   const [gotCards,setGotCards] = useState(false)
   
@@ -18,6 +19,7 @@ const Cards = (props) => {
       .then(res => {
         const cardsArray = []
         res.data.forEach((card,index)=>  cardsArray[index] = card)
+        newCard = cardsArray;
         setCards(oldCards => [...oldCards,...cardsArray])
         // console.log(res.data,cardsArray);
         // setGotCards(true)
@@ -32,7 +34,7 @@ const Cards = (props) => {
     let winHeight = window.innerHeight;
     let scroll = e.target.documentElement.scrollTop
     let height = e.target.documentElement.scrollHeight
-    if(winHeight+scroll >= height && scroll > 100){
+    if(winHeight+scroll >= height && scroll > 100 && newCard.length>0){
       console.log('at the bottom of the page');
       getCards()
     }
