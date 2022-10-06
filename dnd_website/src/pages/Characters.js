@@ -49,7 +49,7 @@ const Characters = (props) => {
   function initializeArray(){
     // charsArray = []
     for(let i =0; i < 15; i++){
-      charsArray.push({name:randomWord(),level:random(),race:races[randomMinMax(0,races.length-1)],class:'Cleric/Life Domain'})
+      charsArray.push({name:randomWord(),level:random(),race:races[randomMinMax(0,races.length-1)],class:'Cleric/Life Domain',id:i+1})
     }
     console.log(charsArray);
     slots = charsArray.length

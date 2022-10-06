@@ -55,7 +55,7 @@ router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   db.query(
-    `SELECT *, count(*) as found FROM user WHERE email = ${db.escape(req.body.identifier)};`,
+    `SELECT * FROM user WHERE email = ${db.escape(req.body.identifier)};`,
     (err, result) => {
       // user does not exists
       if (err) {
@@ -97,7 +97,7 @@ router.post('/login', (req, res, next) => {
               msg: 'Logged in!',
               token,
               user: result[0],
-              found: result[0]['found']
+              found: 1
             });
           }
           return res.status(401).send({

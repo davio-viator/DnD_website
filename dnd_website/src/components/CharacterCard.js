@@ -2,7 +2,18 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/esm/Container';
 
+import StatBlock from './StatBlock';
+
+import {useNavigate }  from 'react-router-dom';
+
 const CharacterCard = (props) => {
+
+  const navigate = useNavigate();
+
+  function redirectToCharacter(id){
+    navigate(`/characters/${id}`)
+  }
+
   return(
     <Container className='mt-5'>
       <Card style={{width:'25rem'}}>
@@ -11,7 +22,7 @@ const CharacterCard = (props) => {
         <Card.Body>
           <Card.Title>{props.values.name}</Card.Title>
           <Card.Subtitle> Level:{props.values.level} | {props.values.race} | {props.values.class}</Card.Subtitle>
-          <Card.Link className='btn ms-4 ps-3' >View</Card.Link>
+          <Card.Link onClick={() => redirectToCharacter(props.values.id)} className='btn ms-4 ps-3' >View</Card.Link>
           <Card.Link className='btn' >Edit</Card.Link>
           <Card.Link className='btn' >Copy</Card.Link>
           <Card.Link className='btn danger' >Delete</Card.Link>

@@ -970,3 +970,32 @@ nav ul, nav ol {
   color: red !important;
   font-weight: bold !important;
 }
+
+.stat-container{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto;
+  margin-left:9vw;
+  margin-right: 57vw;
+  margin-top: 40px;
+}
+
+.stat-text{
+  font-size: 12px;
+  font-weight: bold;
+  color:gray;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.stat-block-size{
+  width: 5.5em;
+}
+
+.border-red{
+  border-color: red !important;
+}
+
+.stat-inspiration-box{
+  border-color: red !important;
+
+}

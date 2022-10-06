@@ -8,6 +8,7 @@ import Logout from './pages/Logout';
 import MainPage from './pages/MainPage';
 import Cards from './pages/Cards';
 import Characters from './pages/Characters';
+import CharacterView from './pages/CharacterView';
 
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -101,6 +102,7 @@ function App() {
           <Route path='/logout' exact element={<Logout setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/cards' exact element={<Cards setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/characters' exact element={<Characters setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
+          <Route path='/characters/:id' element={<CharacterView setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
         </Routes>
 
         <Footer/>
