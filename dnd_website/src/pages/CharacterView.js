@@ -3,11 +3,13 @@ import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/esm/Container';
 
 import StatBlock from '../components/StatBlock';
+import HealthBlock from "../components/HealthBlock";
 
 import { useParams } from "react-router";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const CharacterView = (props) => {
     
@@ -47,12 +49,23 @@ const CharacterView = (props) => {
         let array = Object.keys(statBlock)
         return array.map((item,index) => {
             return(
-                console.log(item,index),
+                // console.log(item,index),
                 <StatBlock key={index} name={item} 
                 modifier={makeModifier(item)} 
                 stat={statBlock[item]}/>
             )
         })
+    }
+
+    function handleDisplay(e){
+        let target =  e.currentTarget
+        if(target.classList.contains('stat-inspiration-box-unchecked')){
+            target.classList.remove('stat-inspiration-box-unchecked')
+            target.classList.add('stat-inspiration-box-checked')
+        }else{
+            target.classList.add('stat-inspiration-box-unchecked')
+            target.classList.remove('stat-inspiration-box-checked')
+        }
     }
     
     return(
@@ -75,9 +88,11 @@ const CharacterView = (props) => {
                     <Card.Title className="t-center mb-0">30 ft.</Card.Title>
                     <Card.Footer className="t-center pt-0 pb-0">Speed</Card.Footer>
                 </Card>
-                <Form>
-                    <Form.Control className="stat-inspiration-box" type="checkbox"></Form.Control>
-                </Form>
+                <div>
+                    <div onClick={(e) => handleDisplay(e)} className="stat-inspiration-box-unchecked"></div>
+                    <div className="t-center mt-2">Inspiration</div>
+                </div>
+                <HealthBlock current={35} max={42} temp={0} />
             </div>
         </>
 
