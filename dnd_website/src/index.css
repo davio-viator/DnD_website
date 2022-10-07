@@ -966,6 +966,16 @@ nav ul, nav ol {
   position: absolute;
   height: 90px;
 }
+
+.character-icon{
+  z-index: 10;
+  margin-top: 1.2rem;
+  margin-left: 1.2rem;
+  background-image: url(https://www.dndbeyond.com/avatars/9221/748/637202353208535995.jpeg);
+  /* position: absolute; */
+  height: 70px;
+}
+
 .danger{
   color: red !important;
   font-weight: bold !important;
@@ -976,7 +986,7 @@ nav ul, nav ol {
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   margin-left:19vw;
   margin-right: 57vw;
-  margin-top: 40px;
+  margin-top: -15px;
 }
 
 .stat-text{
@@ -995,7 +1005,20 @@ nav ul, nav ol {
   border-color: red !important;
 }
 
+.border-red-icon{
+  position: relative;
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+  /* border-radius: 0.750em; */
+}
+
+.front-row {
+  z-index: 1;
+}
+
 .stat-inspiration-box-unchecked{
+  background: white !important;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
   border-radius: 0.750em;
@@ -1007,6 +1030,7 @@ nav ul, nav ol {
 }
 
 .stat-inspiration-box-checked{
+  background-color: white !important;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
   border-radius: 0.750em;
@@ -1027,4 +1051,53 @@ nav ul, nav ol {
 .heal{
   padding-left: 1.4em !important;
   padding-right: 1.4em !important;
+}
+
+.stat-button-size{
+  height: 16px !important;
+  font-size: 12px !important;
+  padding-top:0px !important;
+  padding-bottom: 15px !important;
+}
+
+.stat-input-size{
+  height: 16px !important;
+  font-size: 12px !important;
+  padding-top:0px !important;
+  padding-bottom: 0px !important;
+}
+
+
+.input-heath-block{
+  width: 4rem;
+  border: none !important;
+  outline: none;
+}
+
+.border-red-health{
+  position: relative;
+  border-style: solid;
+  border-width: 1px;
+  border-color: red;
+  border-radius: 0.750em;
+}
+
+.hp-label{
+  position: absolute;
+  bottom :0;
+  left: calc(50% - 40px);
+}
+
+.character-view-header{
+  border-style: solid;
+  border-color: gray !important;
+  border-width: 1px 0 0 0;
+}
+
+.character-name{
+  font-size: 25px;
+}
+
+.character-info{
+  font-size: 0.80em;
 }

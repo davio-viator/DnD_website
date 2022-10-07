@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/esm/Container';
 
 import StatBlock from '../components/StatBlock';
 import HealthBlock from "../components/HealthBlock";
+import CharacterViewHeader from "../components/CharacterViewHeader";
 
 import { useParams } from "react-router";
 import Form from 'react-bootstrap/Form';
@@ -67,20 +68,13 @@ const CharacterView = (props) => {
             target.classList.remove('stat-inspiration-box-checked')
         }
     }
-    
-    return(
-        <>
-            <div className="stat-container">
-                {/* <StatBlock name='Strenght' modifier={makeModifier('str')} stat={statBlock.str}/>
-                <StatBlock name='Dexterity' modifier={makeModifier('dex')} stat={statBlock.dex}/>
-                <StatBlock name='Constitution' modifier={makeModifier('con')} stat={statBlock.con}/>
-                <StatBlock name='Intelligence' modifier={makeModifier('int')} stat={statBlock.int}/>
-                <StatBlock name='Wisdom' modifier={makeModifier('wis')} stat={statBlock.wis}/>
-                <StatBlock name='Charisma' modifier={makeModifier('cha')} stat={statBlock.cha}/> */}
-                {makeStatBlock()}
-                <Card className="stat-block-size ms-1 me-1 border-red">
+
+    function createInfoBlock(){
+        return(
+            <>
+                 <Card className="stat-block-size ms-1 me-1 border-red">
                     <Card.Text className="stat-text mb-0">Proficiency</Card.Text>
-                    <Card.Title className="t-center mb-0">+3</Card.Title>
+                    <Card.Title className="t-center mb-0">+{randomMinMax(2,5)}</Card.Title>
                     <Card.Footer className="t-center pt-0 pb-0">Bonus</Card.Footer>
                 </Card>
                 <Card className="stat-block-size ms-1 me-1 border-red">
@@ -88,11 +82,21 @@ const CharacterView = (props) => {
                     <Card.Title className="t-center mb-0">30 ft.</Card.Title>
                     <Card.Footer className="t-center pt-0 pb-0">Speed</Card.Footer>
                 </Card>
-                <div>
-                    <div onClick={(e) => handleDisplay(e)} className="stat-inspiration-box-unchecked"></div>
-                    <div className="t-center mt-2">Inspiration</div>
+                <div className="me-2 front-row">
+                    <div onClick={(e) => handleDisplay(e)} className="stat-inspiration-box-unchecked ms-4"></div>
+                    <div className="t-center ms-1 mt-2">Inspiration</div>
                 </div>
-                <HealthBlock current={35} max={42} temp={0} />
+            </>
+        )
+    }
+    
+    return(
+        <>
+            <CharacterViewHeader name='Odof' sex='Male' race='Dragonborn' class='Cleric' level={5} xp={1267} xpToNewLevel={6000} />
+            <div className="stat-container">
+                {makeStatBlock()}
+                {createInfoBlock()}
+                <HealthBlock current={35} max={42} temp={12} />
             </div>
         </>
 

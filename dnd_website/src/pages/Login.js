@@ -65,7 +65,8 @@ const Login = (props) => {
     }, 300);
   }
 
-  function handleRegister(){
+  function handleRegister(e){
+    e.preventDefault()
     navigate('/registration')
   }
 
@@ -85,7 +86,7 @@ const Login = (props) => {
         <Form.Group>
         <Row className=" mt-4 mb-4  pe-5 t-center">
           <Col className="lef0t" /* sm="4" */ >
-            <Button disabled={false} value="Submit" type="submit" onClick={handleRegister}>Register</Button>
+            <Button disabled={false} value="Submit" onClick={(e) => handleRegister(e)}>Register</Button>
           </Col>
           <Col className="rig0ht " /* sm="7" */ >
             <Button disabled={false} value="Submit" type="submit" onClick={(e) => handleSubmit(e)}>Valider</Button>
