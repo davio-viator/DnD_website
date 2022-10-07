@@ -5,6 +5,9 @@ import Container from 'react-bootstrap/esm/Container';
 import StatBlock from '../components/StatBlock';
 import HealthBlock from "../components/HealthBlock";
 import CharacterViewHeader from "../components/CharacterViewHeader";
+import SavingThrowsBlock from "../components/SavinThrowsBlock";
+import Senses from "../components/Senses";
+import Proficiencies from "../components/ProficienciesBlock";
 
 import { useParams } from "react-router";
 import Form from 'react-bootstrap/Form';
@@ -98,6 +101,9 @@ const CharacterView = (props) => {
                 {createInfoBlock()}
                 <HealthBlock current={35} max={42} temp={12} />
             </div>
+            <SavingThrowsBlock/>
+            <Senses/>
+            <Proficiencies />
         </>
 
     )
