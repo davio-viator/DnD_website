@@ -8,6 +8,7 @@ import CharacterViewHeader from "../components/CharacterViewHeader";
 import SavingThrowsBlock from "../components/SavinThrowsBlock";
 import Senses from "../components/Senses";
 import Proficiencies from "../components/ProficienciesBlock";
+import SkilsBlock from "../components/SkillsBlock";
 
 import { useParams } from "react-router";
 import Form from 'react-bootstrap/Form';
@@ -95,7 +96,7 @@ const CharacterView = (props) => {
     
     return(
         <>
-            <CharacterViewHeader name='Odof' sex='Male' race='Dragonborn' class='Cleric' level={5} xp={1267} xpToNewLevel={6000} />
+            <CharacterViewHeader name='Odof' sex='Male' race='Dragonborn' class='Cleric' level={5} xp={Math.floor(Math.random()*6001)} xpToNewLevel={6000} />
             <div className="stat-container">
                 {makeStatBlock()}
                 {createInfoBlock()}
@@ -104,6 +105,7 @@ const CharacterView = (props) => {
             <SavingThrowsBlock/>
             <Senses/>
             <Proficiencies />
+            <SkilsBlock/>
         </>
 
     )

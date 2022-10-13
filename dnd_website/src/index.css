@@ -1098,6 +1098,22 @@ nav ul, nav ol {
   border-width: 1px 0 0 0;
 }
 
+.character-icon-progress-bar{
+  border-radius: 0.750rem;
+  height: 5px;
+}
+
+progress::-webkit-progress-bar{
+  border-radius: 0.750rem;
+  background-color: gray;
+  /* color: red; */
+}
+
+progress::-webkit-progress-value{
+  border-radius: 0.750rem;
+  background-color: white;
+}
+
 .character-name{
   font-size: 25px;
 }
@@ -1164,6 +1180,19 @@ nav ul, nav ol {
 }
 
 .proficiencies-box-height{
-  height: 500px;
+  height: 450px;
   margin-bottom: 5rem;
+}
+
+.skills{
+  position:absolute;
+  top: 21rem;
+  margin-top: 1rem;
+  margin-left: calc(19vw + 21rem) !important;
+  width:20rem !important;
+}
+
+
+.fs-7{
+  font-size: 14px;
 }

@@ -12,14 +12,14 @@ const CharacterViewHeader = (props) => {
                 <img className='character-icon border-red-icon' src="https://www.dndbeyond.com/avatars/9221/748/637202353208535995.jpeg?width=60&height=60&fit=bounds&quality=95&auto=webp"/>
                 <ul className="d-inline-block position-absolute ps-3" style={{top:'10%',listStyleType:'none'}}>
                     <li className="character-name" style={{color:'white'}} >{props.name}</li>
-                    <li className="character-info">{props.sex} {props.race} {props.class} {props.level}</li>
+                    <li style={{color:'darkgray'}} className="character-info">{props.sex} {props.race} {props.class} {props.level}</li>
                     <li className="character-info">
-                        <span>lvl {props.level}. </span>
-                        <progress value={props.xp} max={props.xpToNewLevel}></progress>
-                        <span> lvl {props.level+1}.</span>
+                        <span style={{color:'white'}}>lvl {props.level}. </span>
+                        <progress className="character-icon-progress-bar" value={props.xp} max={props.xpToNewLevel}></progress>
+                        <span style={{color:'white'}}> lvl {props.level+1}.</span>
                     </li>
                     <li className="t-center character-info">
-                        <span>{props.xp}/{props.xpToNewLevel} </span>
+                        <span style={{color:'white'}} >{props.xp}/{props.xpToNewLevel} </span>
                     </li>
                 </ul>
              </Container>
