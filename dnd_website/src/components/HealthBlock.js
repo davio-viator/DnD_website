@@ -28,6 +28,7 @@ const HealthBlock = (props) => {
 
   function handleHeal(e){
     let value = parseInt(document.getElementById('input-value').value)
+    if(typeof value != 1) value = 0
     let newHP = current+value;
     newHP>max?setCurrent(max):setCurrent(newHP)
     document.getElementById('input-value').value = null
@@ -35,6 +36,7 @@ const HealthBlock = (props) => {
 
   function handleDamage(e){
     let value = Math.abs(parseInt(document.getElementById('input-value').value))
+    if(typeof value != 1) value = 0
     let newHP
     if(temp <= 0){
       newHP = current-value;
@@ -65,7 +67,7 @@ const HealthBlock = (props) => {
         <div className="d-flex ">
           <div>
             <span>CURRENT</span>
-            <input className="input-heath-block t-center" onChange={(e) => handleHpChange(e)} value={current} type='number'/>
+            <input className="input-heath-block t-center" onChange={(e) => handleHpChange(e)} min={0} max={max} value={current} type='number'/>
           </div>
           <span className="ms-2 me-2" >/</span>
           <div>
