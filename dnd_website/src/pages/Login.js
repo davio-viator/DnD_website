@@ -36,14 +36,17 @@ const Login = (props) => {
             sessionStorage.setItem('loggedIn',true)
             sessionStorage.setItem('iconSrc',res.data.user.icon)
             sessionStorage.setItem('username',res.data.user.username)
+            sessionStorage.setItem('userId',res.data.user.id)
             localStorage.setItem('loggedIn',true)
             localStorage.setItem('iconSrc',res.data.user.icon)
             localStorage.setItem('username',res.data.user.username)
+            localStorage.setItem('userId',res.data.user.id)
           }
           localStorage.setItem('jwt_token',res.data.token)
           props.setUserIcon(res.data.user.icon)
           navigate('/')
         } 
+        console.log(res.data)
       })
       .catch(err=>{
         console.error(err)
