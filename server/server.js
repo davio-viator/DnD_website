@@ -182,5 +182,49 @@ app.get('/get-cards',(req,res) => {
   }
 })
 
+app.get('/get-decks',(req,res)=>{
+  try {
+    connection.query(`SELECT * FROM deck WHERE ownerId=${req.query.id}`,function(errors,rows,fields){
+      if(!!errors){
+        console.error('Error in the query ',errors)
+        res.status(400).send(errors)
+      }else{
+        console.log('Query successful')
+        res.send(rows)
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+
+app.get('/get-cards-deck',(req,res) => {
+  try {
+    connection.query(`
+    SELECT * 
+    FROM deck 
+    JOIN decks_card ON deck.id = decks_card.deck_id 
+    JOIN user ON deck.ownerId = user.id 
+    left JOIN card ON card.id = decks_card.card_id
+    WHERE user.id = ${req.query.id}
+    LIMIT ${req.query.limit}
+    OFFSET ${req.query.offset}
+`,function(errors,rows,fields) {
+      if(!!errors){
+        // console.error('Error in the query ',errors)
+        res.status(400).send(errors)
+      }else{
+        console.log('Query successful')
+        res.send(rows)
+      }
+    })
+  } catch (error) {
+    
+  }
+})
+
+
+
 app.listen(3030,'0.0.0.0');
 

@@ -9,6 +9,8 @@ import MainPage from './pages/MainPage';
 import Cards from './pages/Cards';
 import Characters from './pages/Characters';
 import CharacterView from './pages/CharacterView';
+import Deck from './pages/Deck';
+import DeckView from './pages/DeckView';
 
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -103,6 +105,8 @@ function App() {
           <Route path='/cards' exact element={<Cards setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/characters' exact element={<Characters setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/characters/:id' element={<CharacterView setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
+          <Route path='/deck' element={<Deck setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
+          <Route path='/deck/:id' element={<DeckView setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
         </Routes>
 
         <Footer/>
