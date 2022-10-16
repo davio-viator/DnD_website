@@ -15,6 +15,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
+import SubStatBlock from "../components/SubStatBlock";
 
 const CharacterView = (props) => {
     
@@ -106,6 +107,7 @@ const CharacterView = (props) => {
             <Senses/>
             <Proficiencies />
             <SkilsBlock/>
+            <SubStatBlock/>
         </>
 
     )

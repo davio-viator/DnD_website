@@ -1186,13 +1186,61 @@ progress::-webkit-progress-value{
 
 .skills{
   position:absolute;
-  top: 21rem;
+  top: 20rem;
   margin-top: 1rem;
   margin-left: calc(19vw + 21rem) !important;
   width:20rem !important;
 }
 
+.sub-stat{
+  position:absolute;
+  top: 20rem;
+  margin-top: 1rem;
+  margin-left: calc(19vw + 42rem) !important;
+  width:calc(6px + 31rem) !important;
+}
+
 
 .fs-7{
   font-size: 14px;
+}
+
+.condtion-box-container{
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.condtion-box{
+  flex: 1 1;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+}
+
+.right-t{
+  flex: 1 1;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+}
+
+.borders-red{
+  position: relative;
+  border-style: solid;
+  border-width: 1px;
+  border-color: red;
+}
+
+.borders-red-rounded{
+  position: relative;
+  border-style: solid;
+  border-width: 1px;
+  border-color: red;
+  border-radius: 0.750em;
 }
