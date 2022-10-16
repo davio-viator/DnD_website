@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Form from 'react-bootstrap/Form';
-import Container from "react-bootstrap/esm/Container";
 
 const HealthBlock = (props) => {
 
@@ -27,16 +24,19 @@ const HealthBlock = (props) => {
   }
 
   function handleHeal(e){
-    let value = parseInt(document.getElementById('input-value').value)
-    if(typeof value != 1) value = 0
+    // let value = parseInt(document.getElementById('input-value').value)
+    let value = document.getElementById('input-value').value
+    if(value === '') value = 0
+    else value = Math.abs(parseInt(value))
     let newHP = current+value;
     newHP>max?setCurrent(max):setCurrent(newHP)
     document.getElementById('input-value').value = null
   }
 
   function handleDamage(e){
-    let value = Math.abs(parseInt(document.getElementById('input-value').value))
-    if(typeof value != 1) value = 0
+    let value = document.getElementById('input-value').value
+    if(value === '') value = 0
+    else value = Math.abs(parseInt(value))
     let newHP
     if(temp <= 0){
       newHP = current-value;
@@ -51,7 +51,6 @@ const HealthBlock = (props) => {
         newHP = current-Math.abs(newTemp)
         setCurrent(newHP)
       }
-      console.log(newTemp);
     }
     document.getElementById('input-value').value = null
   }

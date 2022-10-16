@@ -15,6 +15,7 @@ const Logout = (props) => {
       localStorage.removeItem('jwt_token')
       localStorage.removeItem('loggedIn')
       localStorage.removeItem('userId')
+      localStorage.removeItem('name')
       props.setUserIcon('')
       props.setLoggedIn(false)
       navigate('/login')

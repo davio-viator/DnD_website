@@ -41,6 +41,7 @@ const Login = (props) => {
             localStorage.setItem('iconSrc',res.data.user.icon)
             localStorage.setItem('username',res.data.user.username)
             localStorage.setItem('userId',res.data.user.id)
+            localStorage.setItem('name',res.data.user.firstname+' '+res.data.user.lastname)
           }
           localStorage.setItem('jwt_token',res.data.token)
           props.setUserIcon(res.data.user.icon)

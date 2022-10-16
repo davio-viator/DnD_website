@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Card from '../components/Card';
 
+import NoThumbnail from '../assets/images/no-thumbnail-image.png'
+
 import Axios from 'axios';
 
 const Cards = (props) => {

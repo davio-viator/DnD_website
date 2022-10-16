@@ -76,7 +76,7 @@ function App() {
       <Container className='p-0' fluid={true}>
 
         <NavBar className='' bg='dark' expand='lg'>
-          <NavBar.Brand className="menulink ps-3">Davio Viator</NavBar.Brand> 
+          <NavBar.Brand className="menulink ps-3">{/* Davio Viator  */}{localStorage.getItem('name')} </NavBar.Brand> 
 
             <NavBar.Toggle className="boarder-0" aria-controls="navbar-toggle"/>
             <NavBar.Collapse className='justify-content-end' id="navbar-toggle">

@@ -4,6 +4,8 @@ import Card from '../components/Card';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 
+import NoThumbnail from '../assets/images/no-thumbnail-image.png'
+
 import {useNavigate }  from 'react-router-dom';
 
 
@@ -58,13 +60,13 @@ const DeckView = (props) => {
         return(
           <Card key={index} 
           className="cards-container-child"
-          name={item.name} 
-          rank={item.rank}
-          keywords={item.keyword}
-          ecology={item.ecology}
-          strenght={item.strenght} 
-          weakness={item.weakness}
-          iconSrc={item.imgSrc}/>
+          name={item.info_level >=1?item.name:'Unknown'} 
+          rank={item.info_level >=2?item.rank:'Unknown'}
+          keywords={item.info_level >=3?item.keyword:'Unknown'}
+          ecology={item.info_level >=5?item.ecology:'Unknown'}
+          strenght={item.info_level >=4?item.strenght:'Unknown'} 
+          weakness={item.info_level >=4?item.weakness:'Unknown'}
+          iconSrc={item.info_level >=2?item.imgSrc:NoThumbnail}/>
         )
       })
     }
