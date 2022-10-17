@@ -988,7 +988,7 @@ nav ul, nav ol {
 .stat-container{
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  margin-left:19vw;
+  margin-left:16vw;
   margin-right: 57vw;
   margin-top: -15px;
 }
@@ -1002,7 +1002,7 @@ nav ul, nav ol {
 }
 
 .stat-block-size{
-  width: 5.5em;
+  width: 6.7em;
 }
 
 .border-red{
@@ -1145,7 +1145,7 @@ progress::-webkit-progress-value{
 .saving-throws{
   position:absolute;
   margin-top: 1rem;
-  margin-left:19vw !important;
+  margin-left:16vw !important;
   width:20rem !important;
 }
 
@@ -1160,7 +1160,7 @@ progress::-webkit-progress-value{
 .saving-throws-proficiencies{
   position:relative;
   margin-top: 1rem;
-  margin-left:19vw !important;
+  margin-left:16vw !important;
   margin-bottom: 3rem !important;
   width:20rem !important;
 }
@@ -1186,18 +1186,18 @@ progress::-webkit-progress-value{
 
 .skills{
   position:absolute;
-  top: 20rem;
+  top: 21rem;
   margin-top: 1rem;
-  margin-left: calc(19vw + 21rem) !important;
-  width:20rem !important;
+  margin-left: calc(16vw + 21rem) !important;
+  width:19.4rem !important;
 }
 
 .sub-stat{
   position:absolute;
-  top: 20rem;
+  top: 21rem;
   margin-top: 1rem;
-  margin-left: calc(19vw + 42rem) !important;
-  width:calc(6px + 31rem) !important;
+  margin-left: calc(15vw + 41rem) !important;
+  width:calc(7px + 43rem) !important;
 }
 
 
@@ -1243,4 +1243,23 @@ progress::-webkit-progress-value{
   border-width: 1px;
   border-color: red;
   border-radius: 0.750em;
+}
+
+.primary-box {
+  position:absolute;
+  top: 28rem;
+  margin-top: 1rem;
+  margin-left: calc(15.2vw + 42rem) !important;
+  width:calc(6px + 42rem) !important;
+}
+
+#nav-dropdown::after{
+  content: '' !important;
+}
+
+.active{
+  border-style: solid;
+  border-width: 0px 0px 2px 0px;
+  border-color: red;
+  /* border-radius: 0.750em; */
 }

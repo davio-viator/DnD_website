@@ -16,6 +16,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import SubStatBlock from "../components/SubStatBlock";
+import PrimaryBox from "../components/PrimaryBox";
 
 const CharacterView = (props) => {
     
@@ -108,6 +109,7 @@ const CharacterView = (props) => {
             <Proficiencies />
             <SkilsBlock/>
             <SubStatBlock/>
+            <PrimaryBox/>
         </>
 
     )
