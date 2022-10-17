@@ -7,17 +7,20 @@ import Button from 'react-bootstrap/Button';
 import NoThumbnail from '../assets/images/no-thumbnail-image.png'
 
 import {useNavigate }  from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 const DeckView = (props) => {
 
   let offset = 0
+
+  const params = useParams()
     
   const [deck,setDeck] = useState([])
 
   function getDecksCard(){
     let id = localStorage.getItem('userId')
-    Axios.get(`http://localhost:3030/get-cards-deck?id=${id}&limit=6&offset=${offset}`)
+    Axios.get(`http://localhost:3030/get-cards-deck?id=${id}&deck_id=${params.id}&limit=6&offset=${offset}`)
     .then(res => {
       const cardsArray = []
       // let x = []
@@ -58,6 +61,7 @@ const DeckView = (props) => {
     if(cards){
       return cards.map((item,index) => {
         return(
+          console.log(item),
           <Card key={index} 
           className="cards-container-child"
           name={item.info_level >=1?item.name:'Unknown'} 

@@ -41,7 +41,7 @@ app.use((req,res,next)=>{
 
 
 
-const insertSequenceCard = '(name,rank,ecology,strenght,weakness,imgSrc,keyword)';
+const insertSequenceCard = '(`name`,`rank`,ecology,strenght,weakness,imgSrc,keyword)';
 const insertSequenceUser = '(username,firstname,lastname,email,password,status,icon)';
 
 
@@ -63,6 +63,7 @@ app.use('/api', router);
 
 app.post('/save_card',(req,res)=>{
   let src;
+  console.log(req.body.ecology);
   if(req.body.imgSrc.startsWith('http')) src = req.body.imgSrc
   else{
     try {
@@ -207,12 +208,13 @@ app.get('/get-cards-deck',(req,res) => {
     JOIN decks_card ON deck.id = decks_card.deck_id 
     JOIN user ON deck.ownerId = user.id 
     left JOIN card ON card.id = decks_card.card_id
-    WHERE user.id = ${req.query.id}
+    WHERE user.id = ${req.query.id} 
+    AND deck.id = ${req.query.deck_id}
     LIMIT ${req.query.limit}
     OFFSET ${req.query.offset}
 `,function(errors,rows,fields) {
       if(!!errors){
-        // console.error('Error in the query ',errors)
+        console.error('Error in the query ',errors)
         res.status(400).send(errors)
       }else{
         console.log('Query successful')
