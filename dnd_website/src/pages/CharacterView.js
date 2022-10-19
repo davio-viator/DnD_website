@@ -97,7 +97,7 @@ const CharacterView = (props) => {
     }
     
     return(
-        <>
+        <div className="character-view-bg">
             <CharacterViewHeader name='Odof' sex='Male' race='Dragonborn' class='Cleric' level={5} xp={Math.floor(Math.random()*6001)} xpToNewLevel={6000} />
             <div className="stat-container">
                 {makeStatBlock()}
@@ -110,7 +110,7 @@ const CharacterView = (props) => {
             <SkilsBlock/>
             <SubStatBlock/>
             <PrimaryBox/>
-        </>
+        </div>
 
     )
 }
