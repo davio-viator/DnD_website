@@ -1,11 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Nav from 'react-bootstrap/Nav';
+import AttackBlock from './AttackBlock';
+
+
 
 const ActionSubPage = (props) => {
 
+    const [choice,setChoice] = useState('All')
+
     function handleSelected(e,selected){
         console.log(selected);
+        setChoice(selected)
+    }
+
+
+    function handleDisplay(){
+        switch (choice) {
+            case 'All':
+                return (
+                    <>
+                        <AttackBlock/>
+                    </>
+                )
+                break;
+            case 'Attacks':
+                return ( <><AttackBlock/></>)
+                break;
+            case 'Action':
+                return (<p className='t-center'>Actions</p>)
+                break;
+            case 'Bonus Action':
+                return (<p className='t-center'>Bonus Action</p>)
+                break;
+            case 'Reaction':
+                return (<p className='t-center'>Reaction</p>)
+                break;
+            case 'Other':
+                return (<p className='t-center'>Other</p>)
+                break;
+            case 'Limited use':
+                return (<p className='t-center'>Limited use</p>)
+                break;
+        
+            default:
+                break;
+        }
     }
 
     return(
@@ -22,6 +62,7 @@ const ActionSubPage = (props) => {
                 <Nav.Link className='mt-1 mb-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Other" >OTHER</Nav.Link>                
                 <Nav.Link className='me-2 mt-1 mb-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Limited use" >LIMITED USE</Nav.Link>    
             </Nav>
+            {handleDisplay()}
         </div>
     )
 
