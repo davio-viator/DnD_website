@@ -104,12 +104,20 @@ const CharacterView = (props) => {
                 {createInfoBlock()}
                 <HealthBlock current={35} max={42} temp={12} />
             </div>
-            <SavingThrowsBlock/>
-            <Senses/>
-            <Proficiencies />
-            <SkilsBlock/>
-            <SubStatBlock/>
-            <PrimaryBox/>
+            {/* <div style={{display:'flex',flexDirection:'row',justifyItems:'start'}}> */}
+                {/* <div style={{display:'flex',flexDirection:'column'}}> */}
+                    <SavingThrowsBlock/>
+                    <Senses/>
+                    <Proficiencies />
+                {/* </div> */}
+                {/* <div style={{display:'flex',flexDirection:'column'}}> */}
+                    <SkilsBlock/>
+                {/* </div> */}
+                {/* <div style={{display:'flex',flexDirection:'column'}}> */}
+                    <SubStatBlock/>
+                    <PrimaryBox/>
+                {/* </div> */}
+            {/* </div> */}
         </div>
 
     )

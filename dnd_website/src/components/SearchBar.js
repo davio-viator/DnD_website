@@ -16,14 +16,17 @@ const SearchBar = (props) => {
     console.log(e.target.value);
   }
 
+  const placeHolder = props.placeholder?props.placeholder:'Enter the name of your character'
+
   return(
     <>
-      SearchBar works !!!
-      <Row>
+      <Row style={{margin:'auto'}}>
         <Form>
           <Form.Group as={Row}>
-            <Col sm='10'><Form.Control onChange={handleSearch} type='text' placeholder='Enter the name of your character'/></Col>
-            <Col>
+            {props.icon?(<Col sm='12'><div className='spell-search-icon'></div><Form.Control className='ps-4' onChange={handleSearch} type='text' placeholder={placeHolder}/></Col>):
+            <Col sm='10'><Form.Control onChange={handleSearch} type='text' placeholder={placeHolder}/></Col>}
+            
+            {props.submenue==undefined?(<Col>
             <Form.Select defaultValue={'createdAt ASC'} onChange={handleSort}>
               <option value='createdAt DESC'>Created: Newest</option>
               <option value='createdAt ASC'>Created: Oldest</option>
@@ -34,7 +37,8 @@ const SearchBar = (props) => {
               <option value='updatedAt ASC'>Modified: Latest</option>
               <option value='updateddAt DESC'>Modified: Oldest</option>
             </Form.Select>
-            </Col>
+            </Col>):null}
+            
           </Form.Group>
 
         </Form>

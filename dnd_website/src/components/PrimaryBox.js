@@ -17,47 +17,51 @@ const PrimaryBox = (props) => {
         setChoice(selected);
     }
 
-    const [choice,setChoice] = useState('Actions')
+    // const [choice,setChoice] = useState('Actions')
+    const [choice,setChoice] = useState('Spells')
 
     function handleDisplay(){
+        let selected;
         switch (choice) {
             case 'Actions':
-                return <ActionSubPage/>
+                selected = <ActionSubPage/>
                 break;
         
             case 'Spells':
-                return <SpellsSubPage/>
+                selected = <SpellsSubPage/>
                 break;
         
             case 'Inventory':
-                return <InventorySubPage/>
+                selected = <InventorySubPage/>
                 break;
         
             case 'Features & Traits':
-                return <FeaturesTraitsSubPage/>
+                selected = <FeaturesTraitsSubPage/>
                 break;
         
             case 'Description':
-                return <DescriptionSubPage/>
+                selected = <DescriptionSubPage/>
                 break;
         
             case 'Notes':
-                return <NotesSubPage/>
+                selected = <NotesSubPage/>
                 break;
         
             case 'Extras':
-                return <ExtrasSubPage/>
+                selected = <ExtrasSubPage/>
                 break;
         
             default:
                 break;
         }
+        return selected;
     }
 
     return(
-        <div className='primary-box borders-red-rounded'>
+        <div className='primary-box primary-box-height borders-red-rounded'>
             <Nav className="mt-0" justify variant="pillgs"
-            defaultActiveKey="Actions"
+            defaultActiveKey="Spells"
+            style={{position:'sticky'}}
             onSelect={(selectedKey,e)=>handleSelected(e,selectedKey)}
             >                
                 <Nav.Link className='ms-2 mb-0 teete' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Actions" >ACTIONS</Nav.Link>                
@@ -68,7 +72,9 @@ const PrimaryBox = (props) => {
                 <Nav.Link className='mb-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Notes" >NOTES</Nav.Link>                
                 <Nav.Link className='me-1 mb-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Extras" >EXTRAS</Nav.Link>    
             </Nav>
-            {handleDisplay()}
+            <div style={{overflow:'auto',height:'calc(73vh + 1px)'}}>
+                {handleDisplay()}
+            </div>
         </div> 
     )
 

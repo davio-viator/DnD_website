@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
 import Nav from 'react-bootstrap/Nav';
+import ActionBlock from './ActionBlock';
 import AttackBlock from './AttackBlock';
+import BonusActionBlocks from './BonusActionBlock';
+import OtherBlock from './OtherBlock';
+import ReactionBlock from './ReactionBlock';
 
 
 
@@ -16,41 +20,47 @@ const ActionSubPage = (props) => {
 
 
     function handleDisplay(){
+        let selected;
         switch (choice) {
             case 'All':
-                return (
+                selected = (
                     <>
-                        <AttackBlock/>
+                        <AttackBlock sub={true}/>
+                        <ActionBlock sub={true}/>
+                        <BonusActionBlocks/>
+                        <ReactionBlock/>
+                        <OtherBlock/>
                     </>
                 )
                 break;
             case 'Attacks':
-                return ( <><AttackBlock/></>)
+                selected = ( <><AttackBlock sub={false}/></>)
                 break;
             case 'Action':
-                return (<p className='t-center'>Actions</p>)
+                selected = (<><ActionBlock sub={false}/></>)
                 break;
             case 'Bonus Action':
-                return (<p className='t-center'>Bonus Action</p>)
+                selected = (<><BonusActionBlocks/></>)
                 break;
             case 'Reaction':
-                return (<p className='t-center'>Reaction</p>)
+                selected = (<><ReactionBlock/></>)
                 break;
             case 'Other':
-                return (<p className='t-center'>Other</p>)
+                selected = (<><OtherBlock/></>)
                 break;
             case 'Limited use':
-                return (<p className='t-center'>Limited use</p>)
+                selected = (<p className='t-center'>Limited use</p>)
                 break;
         
             default:
                 break;
         }
+        return selected
     }
 
     return(
         <div>
-            <Nav className="mt-0" justify variant="pills"
+            <Nav className="mt-0 mb-3" justify variant="pills"
             defaultActiveKey="All"
             onSelect={(selectedKey,e)=>handleSelected(e,selectedKey)}
             >                
@@ -62,7 +72,9 @@ const ActionSubPage = (props) => {
                 <Nav.Link className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Other" >OTHER</Nav.Link>                
                 <Nav.Link className='me-2 mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Limited use" >LIMITED USE</Nav.Link>    
             </Nav>
-            {handleDisplay()}
+            <div style={{overflow:'auto',height:'calc(67vh + 7px)'}}>
+                {handleDisplay()}
+            </div>
         </div>
     )
 

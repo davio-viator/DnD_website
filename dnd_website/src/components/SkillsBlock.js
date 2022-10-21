@@ -126,9 +126,9 @@ const SkilsBlock = (props) => {
   return(
     <Container fluid={true} className="skills border-red-saving-throw">
       <Row className="t-center fs-7 mt-2">
-        <Col sm="2">prof</Col>
+        <Col className="me-2" sm="1">prof</Col>
         <Col sm="2">mod</Col>
-        <Col sm="5">skill</Col>
+        <Col sm="6">skill</Col>
         <Col>bonus</Col>
       </Row>
       {handleSkils()}

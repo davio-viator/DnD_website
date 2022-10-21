@@ -6,9 +6,9 @@ const Skill = (props) => {
   return(
     <>
       <Row className="t-center fs-7 mt-2">
-        <Col sm="2"><input className="proficiency " readOnly checked={props.proficiency} type='checkbox'></input></Col>
+        <Col className='me-2' sm="1"><input className="proficiency " readOnly checked={props.proficiency} type='checkbox'></input></Col>
         <Col sm="2">{props.prof}</Col>
-        <Col sm="5">{props.name}</Col>
+        <Col sm="6">{props.name}</Col>
         <Col>{props.bonus}</Col>
       </Row>
       <hr className="mb-1 mt-2 pb-1"/>

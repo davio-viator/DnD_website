@@ -1147,6 +1147,7 @@ progress::-webkit-progress-value{
   margin-top: 1rem;
   margin-left:16vw !important;
   width:20rem !important;
+  background-color: white;
 }
 
 .border-red-saving-throw{
@@ -1163,6 +1164,7 @@ progress::-webkit-progress-value{
   margin-left:16vw !important;
   margin-bottom: 3rem !important;
   width:20rem !important;
+  background-color: white;
 }
 
 .senses-text{
@@ -1186,23 +1188,37 @@ progress::-webkit-progress-value{
 
 .skills{
   position:absolute;
-  top: 20rem;
+  top: 21rem;
   margin-top: 1rem;
   margin-left: calc(16vw + 21rem) !important;
-  width:19.4rem !important;
+  height:calc(89vh + 15px);
+  width:18.4rem !important;
+  background-color: white;
 }
 
 .sub-stat{
   position:absolute;
-  top: 20rem;
+  top: 21rem;
   margin-top: 1rem;
-  margin-left: calc(15vw + 41rem) !important;
-  width:calc(7px + 43rem) !important;
+  margin-left: calc(14vw + 41.3rem) !important;
+  width:calc(7px + 44rem) !important;
 }
 
 
 .fs-7{
   font-size: 14px;
+}
+
+.bg-white{
+  background-color: white;
+}
+
+.border-left{
+  border-left: 1px solid #d8d8d8;
+}
+
+.border-left-thick{
+  border-left: 5px solid #d8d8d8;
 }
 
 .condtion-box-container{
@@ -1241,7 +1257,7 @@ progress::-webkit-progress-value{
   position: relative;
   border-style: solid;
   border-width: 1px;
-  /* border-color: red; */
+  border-color: red;
   border-radius: 0.750em;
 }
 
@@ -1251,6 +1267,50 @@ progress::-webkit-progress-value{
   margin-top: 1rem;
   margin-left: calc(15.2vw + 42rem) !important;
   width:calc(6px + 42rem) !important;
+  border-style: solid;
+  border-width: 1px;
+  border-color: red;
+  background-color: white;
+  /* overflow: auto; */
+  margin-left: calc(15.1vw + 41.3rem) !important;
+  width:calc(3px + 43rem) !important;
+}
+
+
+.small-checkbox{
+  height: 20px;
+  margin: 2px;
+  min-width: 20px;
+  width: 20px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #d8d8d8;
+  box-shadow: inset 0 0 4px 0 #d8d8d8;
+}
+
+.small-checkbox-used{
+  height: 20px;
+  margin: 2px;
+  min-width: 20px;
+  width: 20px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #d8d8d8;
+  box-shadow: inset 0 0 4px 0 #d8d8d8;
+}
+
+.small-checkbox-used:before{
+  content: "";
+  display: block;
+  height: 10px;
+  margin-top: 4px;
+  width: 10px;
+  background: red;
+  margin: 5px auto 0;
+}
+
+.primary-box-height{
+  height:calc(78vh + 20px);
 }
 
 #nav-dropdown::after{
@@ -1280,4 +1340,16 @@ progress::-webkit-progress-value{
 .character-view-bg{
   background: url(https://www.dndbeyond.com/avatars/61/484/636453131399186965.jpeg) no-repeat center 0px,
    url(https://www.dndbeyond.com/attachments/0/84/background_texture.png) #f9f9f9 !important;
+}
+
+.spell-search-icon{
+  position: absolute;
+  background: transparent 50% url(https://www.dndbeyond.com/Content/Skins/Waterdeep/images/icons/search-grey.svg) no-repeat;
+  background-size: 20px 20px;
+  height: 20px;
+  margin-right: 10px;
+  width: 20px;
+  margin-top: 9px;
+  margin-right: 25px;
+  padding-right: 15px;
 }

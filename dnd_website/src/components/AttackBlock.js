@@ -98,7 +98,7 @@ function createBonusAction(){
 }
   
   return(
-    <div className='ms-3 me-3'>
+    <div className='ms-3 me-3 mt-3 mb-4'>
       <div className='mt-1 mb-1' style={{fontSize:'12px',}}><span style={{fontWeight:'bold',color:'red',fontSize:'12px'}}>ACTIONS ·</span> Attacks per Actions: {1}</div>
       <Row style={{fontWeight:'bold',fontSize:'12px',}}>
         <Col sm="1"></Col>
@@ -109,8 +109,8 @@ function createBonusAction(){
         <Col sm="3">NOTES</Col>
       </Row>
       {createAttacks()}
-      <div className='mt-1 mb-1' style={{fontSize:'12px',}}><span style={{fontWeight:'bold',color:'red',fontSize:'12px'}}>BONUS ACTIONS</span></div>
-      {createBonusAction()}
+      {!props.sub?<div className='mt-1 mb-1' style={{fontSize:'12px',}}><span style={{fontWeight:'bold',color:'red',fontSize:'12px'}}>BONUS ACTIONS</span></div>:null}
+      {!props.sub?createBonusAction():null}
     </div>
   )
 
