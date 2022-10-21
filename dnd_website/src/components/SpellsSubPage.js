@@ -60,7 +60,6 @@ const SpellsSubPage = (props) => {
     }
 
     function makeSpells(level,conc = false){
-        // console.log(spells)
         if(spells.length>0){
             level = level.toUpperCase();
             let tempArray = [];
@@ -120,7 +119,7 @@ const SpellsSubPage = (props) => {
             <>
                 <div className='d-flex justify-content-between'>
                     <span className='mt-1' style={{color:'red',fontSize:'15px',fontWeight:'bold'}}>{name}</span>
-                    {slots>0?<div className='d-flex mt-1 ms-4'>{makeInputs(slots)}<span className='ms-1' style={{fontWeight:'bold'}}>SLOTS</span></div>:null}
+                    {slots>0?<div className='d-flex mt-1 ms-4'>{makeInputs(slots)}<span className='ms-1 me-2' style={{fontWeight:'bold'}}>SLOTS</span></div>:null}
                 </div>
                 <hr className='mt-0'/>
                 <div className='mt-3'>{header}</div>
