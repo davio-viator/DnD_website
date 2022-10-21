@@ -162,7 +162,7 @@ const SpellsSubPage = (props) => {
                     if(slotsAll!=-1){
                         return(
                             <div key={index}>
-                            {makeSpellHeader(spellLevels[index])}
+                            {makeSpellHeader(spellLevels[index],slotsAll)}
                             {makeSpells(spellLevels[index])}
                             </div>
                         )
