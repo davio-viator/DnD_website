@@ -1,14 +1,13 @@
 import React from 'react';
 
-const ReactionBlock = (props) => {
+import Action from './Action';
 
+const ReactionBlock = (props) => {
+// <Action title={item.title} text={item.text} times={item.times} frequency={item.frequency} />
   return(
     <div className='ms-3 me-3 mt-3 mb-4'>
         <div className='mt-1 mb-1' style={{fontSize:'12px',}}><span style={{fontWeight:'bold',color:'red',fontSize:'12px'}}>REACTIONS</span></div>
-       <h6 className='mt-3 ms-3 mt-3 mb-4'>Actions in Combat</h6>
-        <div className='border-left-thick fs-7 ms-4 ps-2'>
-            Opportunity Attack
-        </div>
+        <Action title='Actions in Combat'  text='Opportunity Attack' times={0} frequency=''/>
     </div>
   )
 

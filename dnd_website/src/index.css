@@ -1188,7 +1188,7 @@ progress::-webkit-progress-value{
 
 .skills{
   position:absolute;
-  top: 21rem;
+  top: 20rem;
   margin-top: 1rem;
   margin-left: calc(16vw + 21rem) !important;
   height:calc(89vh + 15px);
@@ -1198,7 +1198,7 @@ progress::-webkit-progress-value{
 
 .sub-stat{
   position:absolute;
-  top: 21rem;
+  top: 20rem;
   margin-top: 1rem;
   margin-left: calc(14vw + 41.3rem) !important;
   width:calc(7px + 44rem) !important;

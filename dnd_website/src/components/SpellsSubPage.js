@@ -13,6 +13,8 @@ const SpellsSubPage = (props) => {
     const [spells,setSpells] = useState({})
     const [selected,setSelected] = useState('All')
 
+    const spellLevels = ['CANTRIP','1ST','2ND','3RD','4TH','5TH','7TH','7TH','8TH','9TH']
+
     function handleSelected(e,selected){
         console.log(selected);
         setSelected(selected)
@@ -21,12 +23,12 @@ const SpellsSubPage = (props) => {
     const header = (
         <Row style={{fontWeight:'bold',fontSize:'12px',}}>
             <Col sm="1"></Col>
-            <Col sm="4">NAME</Col>
-            <Col sm="1">TIME</Col>
-            <Col sm="1">RANGE</Col>
-            <Col sm="1">HIT/DC</Col>
-            <Col sm="2">EFFECT</Col>
-            <Col sm="2">NOTES</Col>
+            <Col sm="3">NAME</Col>
+            <Col className='ps-2' sm="1">TIME</Col>
+            <Col className='ps-2' sm="1">RANGE</Col>
+            <Col className='ps-2' sm="1">HIT/DC</Col>
+            <Col className='ps-1' sm="2">EFFECT</Col>
+            <Col className='ps-0' sm="3">NOTES</Col>
         </Row>
     )
 
@@ -57,7 +59,8 @@ const SpellsSubPage = (props) => {
         )
     }
 
-    function makeSpells(level){
+    function makeSpells(level,conc = false){
+        // console.log(spells)
         if(spells.length>0){
             level = level.toUpperCase();
             let tempArray = [];
@@ -67,14 +70,25 @@ const SpellsSubPage = (props) => {
                 }
             })
             tempArray = tempArray[0]
+            if(conc){
+                let x = {}
+                for (const item in tempArray) {
+                    if (tempArray[item].concentration) {
+                        const element = tempArray[item];
+                        x[item] = element
+                    }
+                }
+                tempArray = x
+            }
+            const length = Object.keys(tempArray).length
             return Object.values(tempArray).map((item,index) => {
                 return (
-                    <Spell key={index} text={item.text} name={item.name} item_type={item.item_type} time={item.time} range={item.range} range_type={item.range_type} hit_dice={item.hit_dice} effect={item.effect} notes={item.notes} />
-                    
+                    <Spell key={index} text={item.text} name={item.name} item_type={item.item_type} time={item.time} range={item.range} range_type={item.range_type} hit_dice={item.hit_dice} effect={item.effect} notes={item.notes} last={index+1===length} />
                 )
             })
         }
     }
+
 
     function handleClick(e){
         let input = e.target;
@@ -114,47 +128,71 @@ const SpellsSubPage = (props) => {
         )
     }
 
+    function displayConcentrationSpell(){        
+        let concentrationSpell = new Set()
+        if(spells.length>0){
+            spells.forEach(element=>{
+                if(typeof element.title === 'string'){
+                    let spellList = Object.values(element.spells)
+                    spellList.forEach(item => {
+                        if(item.concentration)concentrationSpell.add(element.title)
+                        
+                    })
+                }
+            })
+        }
+        return Array.from(concentrationSpell).map((item,index) => {
+        let slots = getSpellSlots(item)
+            return(
+                <div key={index}>
+                    {makeSpellHeader(item,slots)}
+                    {makeSpells(item,true)}
+                </div>
+            )
+        })
+    }
+
     function displaySpells(){
         let returnValue;
+        let slots = getSpellSlots(selected)
         switch (selected) {
             case 'All':
+                returnValue = spellLevels.map((item,index) => {
+                    var slotsAll = getSpellSlots(spellLevels[index])
+                    if(slotsAll!=-1){
+                        return(
+                            <div key={index}>
+                            {makeSpellHeader(spellLevels[index])}
+                            {makeSpells(spellLevels[index])}
+                            </div>
+                        )
+                    }
+                    
+                })
+                break;
+            case 'CANTRIP':
                 returnValue = (
                     <>
                     {makeSpellHeader('CANTRIP')}
                     {makeSpells('Cantrip')}
-                    {makeSpellHeader('1ST LEVEL',3)}
-                    {makeSpells('1ST')}
                     </>
                 )
-                break;
-            case 'Cantrip':
-                returnValue = (
-                    <>
-                    {makeSpellHeader('CANTRIP',3)}
-                    {makeSpells('Cantrip')}
-                    </>
-                )
-                break;
-            case '1ST':
-                returnValue = (
-                    <>
-                    {makeSpellHeader('1ST LEVEL')}
-                    {makeSpells('1ST')}
-                    </>
-                )
-                
-                break;
-            case '2ND':
-                
-                break;
-            case '3RD':
-                
                 break;
             case 'Concentration':
-                
+                returnValue = (
+                    <>
+                    {displayConcentrationSpell()}
+                    </>
+                )
                 break;
         
             default:
+                returnValue = (
+                    <>
+                    {makeSpellHeader(selected+'LEVEL',slots)}
+                    {makeSpells(selected)}
+                    </>
+                )
                 break;
         }
         return returnValue;
@@ -214,49 +252,227 @@ const SpellsSubPage = (props) => {
     }
 
     function initSpell(){
-        let spellsArray = [{title:'1ST',
-        spells:{
-            1:{
-                text:'cast',
-                name:'Bless',
-                item_type:'Cleric',
-                time:'1A',
-                range:'30ft',
-                range_type:'',
-                hit_dice:'--',
-                effect:'Buff',
-                notes:'D: 1m, V/S/M'
+        let spellsArray = [
+            {
+                title:'CANTRIP',
+                slots:0,
+                spells:{
+                    1:{
+                        text:'at will',
+                        name:'Light',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'Touch',
+                        range_type:'',
+                        hit_dice:'DEX 14',
+                        effect:'Creation*',
+                        notes:'D: 1h, 20 tf sphere, V/M'
+                    },
+                    2:{
+                        text:'at will',
+                        name:'Mending',
+                        item_type:'Cleric',
+                        time:'1m',
+                        range:'Touch',
+                        range_type:'',
+                        hit_dice:'--',
+                        damage:'Utility',
+                        notes:'V/S/M'
+                    },
+                    3:{
+                        text:'it well',
+                        name:'Sacred Flame',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'60 ft',
+                        range_type:'',
+                        hit_dice:'--',
+                        damage:'2d8',
+                        notes:'V/S'
+                    },
+                    4:{
+                        text:'at will',
+                        name:'Spare the Dying',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'Touch',
+                        range_type:'',
+                        hit_dice:'--',
+                        damage:'Healing',
+                        notes:'V/S'
+                    },
+
+                }
             },
-            2:{
-                text:'cast',
-                name:'Command',
-                item_type:'Cleric',
-                time:'1A',
-                range:'60ft',
-                range_type:'',
-                hit_dice:'WIS 14',
-                effect:'Prone',
-                notes:'D: 1Rnd, V'
+            {
+                title:'1ST',
+                slots:4,
+                spells:{
+                    1:{
+                        text:'cast',
+                        name:'Bless',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'30ft',
+                        range_type:'',
+                        hit_dice:'--',
+                        effect:'Buff',
+                        notes:'D: 1m, V/S/M',
+                        concentration:true
+                    },
+                    2:{
+                        text:'cast',
+                        name:'Command',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'60ft',
+                        range_type:'',
+                        hit_dice:'WIS 14',
+                        effect:'Prone',
+                        notes:'D: 1Rnd, V'
+                    },
+                    3:{
+                        text:'cast',
+                        name:'Cure Wounds',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'Touch',
+                        range_type:'',
+                        hit_dice:'--',
+                        effect:'1d8+6 🖤',
+                        notes:'V/S'
+                    },            
+                }
             },
-            3:{
-                text:'cast',
-                name:'Cure Wounds',
-                item_type:'Cleric',
-                time:'1A',
-                range:'Touch',
-                range_type:'',
-                hit_dice:'--',
-                effect:'1d8+6 🖤',
-                notes:'V/S'
-            },            
-        }}]
+            {
+                title:'2ND',
+                slots:3,
+                spells:{
+                    1:{
+                        text:'cast',
+                        name:'Lesser Restoration',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'Touch',
+                        range_type:'',
+                        hit_dice:'--',
+                        effect:'Blinded*',
+                        notes:'V/S'
+                    },
+                    2:{
+                        text:'cast',
+                        name:'Spiritual Weapon',
+                        item_type:'Cleric',
+                        time:'1BA',
+                        range:'60ft',
+                        range_type:'',
+                        hit_dice:'+6',
+                        effect:'1d8+3',
+                        notes:'D: 1m, V/S'
+                    },
+                }
+            },
+            {
+                title:'3RD',
+                slots:2,
+                spells:{
+                    1:{
+                        text:'at will',
+                        name:'Spirit Guardians',
+                        item_type:'Cleric',
+                        time:'1A',
+                        range:'self',
+                        range_type:'',
+                        hit_dice:'WIS 14',
+                        effect:'3d8',
+                        notes:'&D: 10m, 15ft., V/S/M',
+                        concentration:true
+                    },
+                }
+            },
+        ]
         // ctrl+shift+u 1 = 
-        setSpells(oldSpells => [...oldSpells,...spellsArray])
+        setSpells(spellsArray)
+    }
+
+    function getSpellSlots(level){
+        let slots = -1
+        if(spells.length>0){
+            spells.forEach(element => {
+                if(element.title===level){
+                    slots = element.slots
+                }
+            })
+        }
+        return slots
+    }
+
+    function makeMenu(){
+        let spellsLevel = new Set()
+        if(spells.length>0){
+            spells.forEach(element=>{
+                if(typeof element.title === 'string'){
+                    spellsLevel.add(element)
+                }
+            })
+        }
+        return Array.from(spellsLevel).map((item,index) => {
+            return(
+                <Nav.Link key={index} className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey={item.title}>{displayName(item.title)}</Nav.Link>
+                
+            )
+        })
+    }
+
+    function MakeConcentrationMenuIcon(){
+        let hasConcentration = false;
+        if(spells.length>0){
+            spells.forEach(element=>{
+                if(typeof element.title === 'string'){
+                    let x = Object.values(element.spells)
+                    x.forEach(item => {
+                        if(item.concentration)hasConcentration = true
+                    })
+                }
+            })
+        }
+        return hasConcentration?
+        <Nav.Link className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey='Concentration'>{displayName('Concentration')}</Nav.Link>
+        :null
+    }
+
+    function displayName(name){
+        let newName = '';
+        switch (name) {
+            case 'CANTRIP':
+                newName = '- 0 -'
+                break;
+        
+            case 'Concentration':
+                newName = 'C'
+                break;
+        
+            default:
+                newName = name
+                break;
+        }
+        return newName
+    }
+
+    function test(){
+        var object = {"0":5,"1":7,"2":4,"3":6,"4":7,"5":8,"6":12,"7":11,"8":2}  
+        var covert  = Object.keys(object).map(function(key)  
+        {  
+        return [Number(key), object[key]];  
+        });  
+        
+        console.log(covert);  
     }
 
     useEffect(()=>{
-        initCantrip()
+        // initCantrip()
         initSpell()
+        // test()
     },[])
 
     return(
@@ -270,16 +486,14 @@ const SpellsSubPage = (props) => {
                     onSelect={(selectedKey,e)=>handleSelected(e,selectedKey)}
                     >                
                         <Nav.Link className='ms-2 mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="All" >ALL</Nav.Link>                
-                        <Nav.Link className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold',}} eventKey="Cantrip" >- 0 -</Nav.Link>                
-                        <Nav.Link className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="1ST" >1ST</Nav.Link>                
-                        <Nav.Link className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="2ND Action" >2ND</Nav.Link>                
-                        <Nav.Link className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="3RD" >3RD</Nav.Link>                
-                        <Nav.Link title="Concentration" className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Concentration" >C</Nav.Link>
+                        {makeMenu()}               
+                        {MakeConcentrationMenuIcon()}
                     </Nav>
                 </div>
             </div>
-            <div style={{overflow:'auto',overflowX:'hidden',height:'calc(56vh + 16px)'}}>
+            <div style={{overflow:'auto',overflowX:'hidden',height:'calc(56vh + 12px)'}}>
                 {displaySpells()}
+                
             </div>
         </div>
     )

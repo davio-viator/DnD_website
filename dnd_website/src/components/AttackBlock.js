@@ -3,6 +3,8 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import Attack from './Attack';
+
 const AttackBlock = (props) => {
 
   const actions = [
@@ -62,18 +64,11 @@ const AttackBlock = (props) => {
 function createAttacks(){
   return actions.map((item,index)=>{
     return(
-      <Row key={index} className='mt-3'>
-        <Col key={index+item.icon} sm="1">{item.icon}</Col>
-        <Col key={index+item.item_name} className='fs-7' sm="3">{item.item_name}
-          {item.item_type!==''?<Row key={index+item.item_type} style={{fontSize:'11px',color:'gray'}} className="ms-0">{item.item_type}</Row>:null}
-        </Col>
-        <Col key={index+item.range} className='fs-7' sm="1">{item.range}
-          {item.range_type?<Row key={index+item.range_type} style={{fontSize:'11px',color:'gray'}} className="ms-0">{item.range_type}</Row>:null}
-        </Col>
-        <Col key={index+item.hit_dice} className='fs-7' sm="2">{item.hit_dice}</Col>
-        <Col key={index+item.damage} className='fs-7' sm="2">{item.damage} </Col>
-        <Col key={index+item.notes} className='fs-7' sm="3">{item.notes}</Col>
-      </Row>
+      <Attack key={index} icon={item.icon} 
+      item_name={item.item_name} item_type={item.item_type} 
+      range={item.range} range_type={item.range_type} 
+      hit_dice={item.hit_dice} damage={item.damage}
+      notes={item.notes} />
     )
   })
 }
@@ -81,18 +76,11 @@ function createAttacks(){
 function createBonusAction(){
   return bonusActions.map((item,index)=>{
     return(
-     <Row key={index} className='mt-3'>
-        <Col key={index+item.icon} sm="1">{item.icon}</Col>
-        <Col key={index+item.item_name} className='fs-7' sm="3">{item.item_name}
-          {item.item_type!==''?<Row key={index+item.item_type} style={{fontSize:'11px',color:'gray'}} className="ms-0">{item.item_type}</Row>:null}
-        </Col>
-        <Col key={index+item.range} className='fs-7' sm="1">{item.range}
-          {item.range_type?<Row key={index+item.range_type} style={{fontSize:'11px',color:'gray'}} className="ms-0">{item.range_type}</Row>:null}
-        </Col>
-        <Col key={index+item.hit_dice} className='fs-7' sm="2">{item.hit_dice}</Col>
-        <Col key={index+item.damage} className='fs-7' sm="2">{item.damage} </Col>
-        <Col key={index+item.notes} className='fs-7' sm="3">{item.notes}</Col>
-      </Row>
+      <Attack key={index} icon={item.icon} 
+      item_name={item.item_name} item_type={item.item_type} 
+      range={item.range} range_type={item.range_type} 
+      hit_dice={item.hit_dice} damage={item.damage}
+      notes={item.notes} />
     )
   })
 }

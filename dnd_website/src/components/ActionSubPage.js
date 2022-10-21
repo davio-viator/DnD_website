@@ -72,7 +72,7 @@ const ActionSubPage = (props) => {
                 <Nav.Link className='mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Other" >OTHER</Nav.Link>                
                 <Nav.Link className='me-2 mt-1 mb-0 ps-0 pe-0' style={{fontSize:'10px',fontWeight:'bold'}} eventKey="Limited use" >LIMITED USE</Nav.Link>    
             </Nav>
-            <div style={{overflow:'auto',height:'calc(67vh + 7px)'}}>
+            <div style={{overflow:'auto',height:'calc(67vh + 5px)'}}>
                 {handleDisplay()}
             </div>
         </div>

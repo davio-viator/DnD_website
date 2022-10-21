@@ -1,5 +1,7 @@
 import React from 'react';
+
 import AttackBlock from './AttackBlock';
+import Action from './Action';
 
 const ActionBlock = (props) => {
 
@@ -59,19 +61,7 @@ const ActionBlock = (props) => {
     function makeActions(){
         return actions.map((item,index)=>{
             return(
-                <div key={index+item.title+index+item.text+index+item.times+index+item.frequency}>
-                    <h6 key={index+item.title} className='mt-3 ms-3'>{item.title}</h6>
-                    <div key={index+item.text} className='border-left-thick fs-7 ms-4 ps-2'>
-                        {item.text}
-                    </div>
-                    {item.times>0?
-                        <div key={index+item.times} className='d-flex mt-1 ms-4'>
-                            {makeInputs(item.times)}
-                            <span key={index+item.frequency}> / {item.frequency}</span>
-                        </div>
-                    :null}
-                    
-                </div>
+                <Action key={index} title={item.title} text={item.text} times={item.times} frequency={item.frequency} />
             )
         })
     }

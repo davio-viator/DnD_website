@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Action from './Action';
+
 const OtherBlock = (props) => {
 
   const spells = [
@@ -26,49 +28,11 @@ const OtherBlock = (props) => {
     }
   ]
 
-  function handleClick(e){
-    let input = e.target;
-    let className = input.classList[0]
-    if(className.includes('used')){
-        input.classList.remove(className)
-        input.classList.add(className.replace('-used',''))
-    }
-    else{
-        input.classList.remove(className)
-        input.classList.add(className+'-used')
-    }
-  }
-
-  function makeInputs(number){
-    let sizeArray = []
-    for (let i = 0; i < number; i++) {
-        sizeArray.push(i)
-    }
-    return (sizeArray.map((item,index)=>{
-        return(
-            <div onClick={(e) => handleClick(e)} key={index+item} role="checkbox" aria-checked="false" aria-label="use" className="small-checkbox"></div>
-        )
-    }))
-  }
 
   function spellsText(){
     return spells.map((item,index)=>{
         return(
-            <div key={index+item.title+index+item.text+index+item.times+index+item.frequency}>
-              <h6 key={index+item.title} className='mt-3 ms-3'>{item.title}</h6>
-              <div key={index+item.text} className='border-left-thick fs-7 ms-4 ps-2'>
-                {item.text.split('\n').map((item,index)=>{
-                    return <p key={index}>{item}</p>
-                })}
-              </div>
-              {item.times>0?
-                <div key={index+item.times} className='d-flex mt-1 ms-4'>
-                  {makeInputs(item.times)}
-                  <span key={index+item.frequency}> / {item.frequency}</span>
-                </div>
-              :null}
-              
-          </div>
+            <Action key={index} title={item.title} text={item.text} times={item.times} frequency={item.frequency} />
         )
     })
   }
@@ -76,21 +40,7 @@ const OtherBlock = (props) => {
   function featureTest(){
     return features.map((item,index)=>{
       return(
-          <div key={index+item.title+index+item.text+index+item.times+index+item.frequency}>
-            <h6 key={index+item.title} className='mt-3 ms-3'>{item.title}</h6>
-            <div key={index+item.text} className='border-left-thick fs-7 ms-4 ps-2'>
-              {item.text.split('\n').map((item,index)=>{
-                  return <p key={index}>{item}</p>
-              })}
-            </div>
-            {item.times>0?
-              <div key={index+item.times} className='d-flex mt-1 ms-4'>
-                {makeInputs(item.times)}
-                <span key={index+item.frequency}> / {item.frequency}</span>
-              </div>
-            :null}
-            
-        </div>
+        <Action key={index} title={item.title} text={item.text} times={item.times} frequency={item.frequency} />
       )
   })
   }
@@ -98,10 +48,7 @@ const OtherBlock = (props) => {
   return(
     <div className='ms-3 me-3 mt-3 mb-4'>
       <div className='mt-1 mb-1' style={{fontSize:'12px',}}><span style={{fontWeight:'bold',color:'red',fontSize:'12px'}}>OTHER</span></div>
-      <h6 className='mt-3 ms-3'>Actions in Combat</h6>
-        <div className='border-left-thick fs-7 ms-4 ps-2'>
-            Interact with an Object
-        </div>
+        <Action title='Actions in Combat'  text='Interact with an Object' times={0} frequency=''/>
         {spellsText()}
         {featureTest()}
     </div>

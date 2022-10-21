@@ -3,6 +3,9 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import Attack from './Attack';
+import Action from './Action';
+
 const BonusActionBlocks = (props) => {
 
     const bonusActions = [
@@ -16,32 +19,6 @@ const BonusActionBlocks = (props) => {
         notes:'D: 1m, V/S'}
       ]
 
-      const actions = [
-        {
-            title:'Breath Weapon (Blue)',
-            text:'As an action once per short rest, exhale in a 5 by 30 ft. line (DEX DC 13, half damage on success) for 2d6 Lightning Damage [6th] 3d6, [11th] 4d6, [16th] 5d6',
-            times:1,
-            frequency:'Short Rest'
-        },
-        {
-            title:'Channel Divinity: Preserve Life',
-            text:'As an action, you can restore <strong>25</strong> HP. Choose any creatures within 30 ft. of you, and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. You can’t use this feature on an undead or a construct.',
-            times:0,
-            frequency:''
-        },
-        {
-            title:'Channel Divinity: Turn Undead',
-            text:'As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a WIS saving throw (DC <strong>14</strong>). If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage. A turned creature must spend its turns trying to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s nowhere to move, the creature can use the Dodge action.',
-            times:0,
-            frequency:''
-        },
-        {
-            title:'Unarmed Strike',
-            text:'ou can punch, kick, head-butt, or use a similar forceful blow and deal bludgeoning damage equal to 1 + STR modifier',
-            times:0,
-            frequency:''
-        }
-    ]
 
     const specialBonusAction = [
         {
@@ -61,65 +38,19 @@ const BonusActionBlocks = (props) => {
       function createBonusAction(){
         return bonusActions.map((item,index)=>{
           return(
-           <Row key={index} className='mt-3'>
-              <Col key={index+item.icon} sm="1">{item.icon}</Col>
-              <Col key={index+item.item_name} className='fs-7' sm="3">{item.item_name}
-                {item.item_type!==''?<Row key={index+item.item_type} style={{fontSize:'11px',color:'gray'}} className="ms-0">{item.item_type}</Row>:null}
-              </Col>
-              <Col key={index+item.range} className='fs-7' sm="1">{item.range}
-                {item.range_type?<Row key={index+item.range_type} style={{fontSize:'11px',color:'gray'}} className="ms-0">{item.range_type}</Row>:null}
-              </Col>
-              <Col key={index+item.hit_dice} className='fs-7' sm="2">{item.hit_dice}</Col>
-              <Col key={index+item.damage} className='fs-7' sm="2">{item.damage} </Col>
-              <Col key={index+item.notes} className='fs-7' sm="3">{item.notes}</Col>
-            </Row>
+            <Attack key={index} icon={item.icon} 
+            item_name={item.item_name} item_type={item.item_type} 
+            range={item.range} range_type={item.range_type} 
+            hit_dice={item.hit_dice} damage={item.damage}
+            notes={item.notes} />
           )
         })
-      }
-
-      function handleClick(e){
-        let input = e.target;
-        let className = input.classList[0]
-        if(className.includes('used')){
-            input.classList.remove(className)
-            input.classList.add(className.replace('-used',''))
-        }
-        else{
-            input.classList.remove(className)
-            input.classList.add(className+'-used')
-        }
-      }
-
-      function makeInputs(number){
-        let sizeArray = []
-        for (let i = 0; i < number; i++) {
-            sizeArray.push(i)
-        }
-        return (sizeArray.map((item,index)=>{
-            return(
-                <div onClick={(e) => handleClick(e)} key={index+item} role="checkbox" aria-checked="false" aria-label="use" className="small-checkbox"></div>
-            )
-        }))
       }
 
       function createSpecialBonusActionText(name,text){
         return specialBonusAction.map((item,index)=>{
             return(
-                <div key={index+item.title+index+item.text+index+item.times+index+item.frequency}>
-                    <h6 key={index+item.title} className='mt-3 ms-3'>{item.title}</h6>
-                    <div key={index+item.text} className='border-left-thick fs-7 ms-4 ps-2'>
-                        {item.text.split('\n').map((item,index)=>{
-                           return <p key={index}>{item}</p>
-                        })}
-                    </div>
-                    {item.times>0?
-                        <div key={index+item.times} className='d-flex mt-1 ms-4'>
-                            {makeInputs(item.times)}
-                            <span key={index+item.frequency}> / {item.frequency}</span>
-                        </div>
-                    :null}
-                    
-                </div>
+                <Action key={index} title={item.title} text={item.text} times={item.times} frequency={item.frequency} />
             )
         })
       }
