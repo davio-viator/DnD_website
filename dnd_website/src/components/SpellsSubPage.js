@@ -11,6 +11,7 @@ import Spell from '../components/Spell';
 const SpellsSubPage = (props) => {
 
     const [spells,setSpells] = useState({})
+    const [spellsSave,setSpellsSave] = useState(spells)
     const [selected,setSelected] = useState('All')
 
     const spellLevels = ['CANTRIP','1ST','2ND','3RD','4TH','5TH','7TH','7TH','8TH','9TH']
@@ -144,7 +145,7 @@ const SpellsSubPage = (props) => {
         let slots = getSpellSlots(item)
             return(
                 <div key={index}>
-                    {makeSpellHeader(item,slots)}
+                    {makeSpellHeader(item+' LEVEL',slots)}
                     {makeSpells(item,true)}
                 </div>
             )
@@ -161,7 +162,7 @@ const SpellsSubPage = (props) => {
                     if(slotsAll!=-1){
                         return(
                             <div key={index}>
-                            {makeSpellHeader(spellLevels[index],slotsAll)}
+                            {item!=='CANTRIP'?makeSpellHeader(spellLevels[index]+' LEVEL',slotsAll):makeSpellHeader(spellLevels[index],slotsAll)}
                             {makeSpells(spellLevels[index])}
                             </div>
                         )
@@ -188,66 +189,13 @@ const SpellsSubPage = (props) => {
             default:
                 returnValue = (
                     <>
-                    {makeSpellHeader(selected+'LEVEL',slots)}
+                    {makeSpellHeader(selected+' LEVEL',slots)}
                     {makeSpells(selected)}
                     </>
                 )
                 break;
         }
         return returnValue;
-    }
-
-    function initCantrip(){
-        let cantripArray = {title:'CANTRIP',
-        spells:{
-            1:{
-                text:'at will',
-                name:'Light',
-                item_type:'Cleric',
-                time:'1A',
-                range:'Touch',
-                range_type:'',
-                hit_dice:'DEX 14',
-                effect:'Creation*',
-                notes:'D: 1h, 20 tf sphere, V/M'
-            },
-            2:{
-                text:'at will',
-                name:'Mending',
-                item_type:'Cleric',
-                time:'1m',
-                range:'Touch',
-                range_type:'',
-                hit_dice:'--',
-                damage:'Utility',
-                notes:'V/S/M'
-            },
-            3:{
-                text:'it well',
-                name:'Sacred Flame',
-                item_type:'Cleric',
-                time:'1A',
-                range:'60 ft',
-                range_type:'',
-                hit_dice:'--',
-                damage:'2d8',
-                notes:'V/S'
-            },
-            4:{
-                text:'at will',
-                name:'Spare the Dying',
-                item_type:'Cleric',
-                time:'1A',
-                range:'Touch',
-                range_type:'',
-                hit_dice:'--',
-                damage:'Healing',
-                notes:'V/S'
-            },
-
-        }}
-
-        setSpells(oldSpells => [oldSpells,cantripArray])
     }
 
     function initSpell(){
@@ -468,8 +416,11 @@ const SpellsSubPage = (props) => {
         console.log(covert);  
     }
 
+    function handleSearch(value){
+        console.log(value)
+    }
+
     useEffect(()=>{
-        // initCantrip()
         initSpell()
         // test()
     },[])
@@ -478,7 +429,7 @@ const SpellsSubPage = (props) => {
         <div className='ms-3'>
             {makeHeader()}
             <div>
-                <SearchBar icon placeholder="Search Spell Names,Casting Times, Damage Types,Conditions or Tags" submenue={false}/>
+                <SearchBar onChange={(value,e) => handleSearch(value)} icon placeholder="Search Spell Names,Casting Times, Damage Types,Conditions or Tags" submenue={false}/>
                 <div className='mt-3 mb-3' style={{width:'40%'}}>
                     <Nav className="mt-0 mb-3" justify variant="pills"
                     defaultActiveKey="All"
@@ -491,8 +442,7 @@ const SpellsSubPage = (props) => {
                 </div>
             </div>
             <div style={{overflow:'auto',overflowX:'hidden',height:'calc(56vh + 12px)'}}>
-                {displaySpells()}
-                
+                {displaySpells()}                
             </div>
         </div>
     )
