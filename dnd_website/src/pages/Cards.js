@@ -5,15 +5,16 @@ import Card from '../components/Card';
 import NoThumbnail from '../assets/images/no-thumbnail-image.png'
 
 import Axios from 'axios';
+import Notes from '../components/Notes';
 
 const Cards = (props) => {
 
   var newCard = [];
   
-  const [gotCards,setGotCards] = useState(false)
-  
   let offset = 0
   const [cards,setCards] = useState([])
+  const [noteVisible,setNoteVisible] = useState(false)
+  const [cid,setId] = useState()
 
   function getCards(){
     // setGotCards(false)
@@ -41,15 +42,20 @@ const Cards = (props) => {
       getCards()
     }
   }
+
   useEffect(()=>{
     window.addEventListener('scroll',handleScroll)
     getCards()
   },[])
 
+  function handleNotes(){
+    return noteVisible?<Notes id={cid}/>:null
+  }
+
   function createCard(){
     return cards.map((item,index) => {
       return(
-        <Card key={index} 
+        <Card key={item.id} 
         className="cards-container-child"
         name={item.name} 
         rank={item.rank}
@@ -57,14 +63,22 @@ const Cards = (props) => {
         ecology={item.ecology}
         strenght={item.strenght} 
         weakness={item.weakness}
-        iconSrc={item.imgSrc}/>
+        iconSrc={item.imgSrc}
+        handleNotes={handleNotes}
+        setNoteVisibleprops={setNoteVisible}
+        setId={setId}
+        cid={cid}
+        id={item.id}/>
       )
     })
   }
 
   return(
-    <div className='cards-container ps-5 ms-5 mb-5'>
-     {createCard()}
+    <div>
+        {handleNotes()}
+      <div className='cards-container ps-5 ms-5 mb-5'>
+      {createCard()}
+      </div>
     </div>
   )
 
