@@ -200,6 +200,38 @@ app.get('/get-decks',(req,res)=>{
 })
 
 
+app.get('/get-spells-db-test',(req,res)=>{
+  try {
+    connection.query('SELECT spells FROM character_sheet WHERE id=0',function(errors,rows,fields){
+      if(!!errors){
+        console.error('Error in the query ',errors)
+        res.status(400).send(errors)
+      }else{
+        console.log('Query successful')
+        res.send(rows)
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+app.get('/get-character-db-test',(req,res)=>{
+  try {
+    connection.query('SELECT * FROM character_sheet WHERE id=0',function(errors,rows,fields){
+      if(!!errors){
+        console.error('Error in the query ',errors)
+        res.status(400).send(errors)
+      }else{
+        console.log('Query successful')
+        res.send(rows)
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 app.get('/get-cards-deck',(req,res) => {
   try {
     connection.query(`
