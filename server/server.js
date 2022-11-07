@@ -250,7 +250,7 @@ app.get('/set-notes',(req,res) => {
         console.error('Error in the query ',errors)
         res.status(400).send(errors)
       }else{
-        console.log('Query successful')
+        console.log('Query successful',req.query.notes)
         res.send(rows)
       }
     })

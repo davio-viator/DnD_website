@@ -30,7 +30,6 @@ const Card = (props) =>{
   }
 
   function handleNotesClick(){
-    console.log(props.id,props.cid);
     props.setId(props.id)
     props.setNoteVisibleprops(noteVisible)
     handleFlipNotes()

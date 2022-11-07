@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 
 import NoThumbnail from '../assets/images/no-thumbnail-image.png'
 
-import {useNavigate }  from 'react-router-dom';
+import Notes from '../components/Notes';
+
 import { useParams } from 'react-router-dom';
 
 
@@ -17,6 +18,8 @@ const DeckView = (props) => {
   const params = useParams()
     
   const [deck,setDeck] = useState([])
+  const [noteVisible,setNoteVisible] = useState(false)
+  const [cid,setId] = useState()
 
   function getDecksCard(){
     let id = localStorage.getItem('userId')
@@ -56,12 +59,16 @@ const DeckView = (props) => {
     }
   }
 
+  function handleNotes(){
+    return noteVisible?<Notes id={cid}/>:null
+  }
+
+
   function createCard(){
     let cards = deck
     if(cards){
       return cards.map((item,index) => {
         return(
-          console.log(item),
           <Card key={index} 
           className="cards-container-child"
           name={item.info_level >=1?item.name:'Unknown'} 
@@ -70,7 +77,12 @@ const DeckView = (props) => {
           ecology={item.info_level >=5?item.ecology:'Unknown'}
           strenght={item.info_level >=4?item.strenght:'Unknown'} 
           weakness={item.info_level >=4?item.weakness:'Unknown'}
-          iconSrc={item.info_level >=2?item.imgSrc:NoThumbnail}/>
+          iconSrc={item.info_level >=2?item.imgSrc:NoThumbnail}
+          handleNotes={handleNotes}
+          setNoteVisibleprops={setNoteVisible}
+          setId={setId}
+          cid={cid}
+          id={item.id}/>
         )
       })
     }
@@ -82,8 +94,11 @@ const DeckView = (props) => {
   },[])
 
   return(
-    <div className='cards-container ps-5 ms-5 mb-5'>
-        {createCard()}
+    <div>
+      {handleNotes()}
+      <div className='cards-container ps-5 ms-5 mb-5'>
+          {createCard()}
+      </div>
     </div>
   )
 }

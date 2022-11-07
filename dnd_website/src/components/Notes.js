@@ -15,7 +15,6 @@ const Notes = (props) => {
   const [notes,setNotes] = useState('∅')
 
   function getNotes(){
-    console.log(props);
     Axios.get(`http://localhost:3030/get-notes?id=${props.id}`)
       .then(res =>{
         name = res.data[0].name
@@ -26,8 +25,8 @@ const Notes = (props) => {
       })
   }
 
-  function updateNotes(){
-    Axios.get(`http://localhost:3030/set-notes?id=${props.id}&notes=${notes}`)
+  function updateNotes(e){
+    Axios.get(`http://localhost:3030/set-notes?id=${props.id}&notes=${e.target.value}`)
       .then(res =>{
       })
       .catch(err => {
@@ -36,10 +35,10 @@ const Notes = (props) => {
   }
 
   function handleChange(e){
-    clearTimeout(timer)
     setNotes(e.target.value)
+    clearTimeout(timer)
     timer = setTimeout(() => {
-      updateNotes()
+      updateNotes(e)
     }, 800);
   }
 
