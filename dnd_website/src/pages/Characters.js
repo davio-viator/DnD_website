@@ -8,7 +8,8 @@ import randomWord from 'random-words';
 
 const Characters = (props) => {
 
-  const [test,setTest] = useState('')
+  const [search,setSearch] = useState('')
+  const [sort,setSort] = useState('createdAt DESC')
 
   let charsArray = []
   let slots = 0;
@@ -46,28 +47,115 @@ const Characters = (props) => {
     return Math.floor(Math.random() * (max - min +1 ))+min
   }
 
+  function randomDate(){
+    const maxDate = Date.now();
+    const timestamp = Math.floor(Math.random() * maxDate);
+    return new Date(timestamp);
+  }
+
   function initializeArray(){
     // charsArray = []
     for(let i =0; i < 15; i++){
-      charsArray.push({name:randomWord(),level:random(),race:races[randomMinMax(0,races.length-1)],class:'Cleric/Life Domain',id:i+1})
+      charsArray.push({name:randomWord(),level:random(),race:races[randomMinMax(0,races.length-1)],class:'Cleric/Life Domain',id:i+1,createdAt:randomDate(),updatedAt:randomDate()})
     }
-    console.log(charsArray);
     slots = charsArray.length
   }
 
 
   function createCard(){
-    return charsArray.map((item,index) =>{
-      return(
-        <CharacterCard key={index} values={item} />
-      )
+    let sortedArray = handleSort(sort)
+    console.log(sortedArray);
+    return sortedArray.map((item,index) =>{
+      let exist = item.name.includes(search) || item.class.includes(search) || item.race.includes(search) || item.level===parseInt(search)
+      console.log(exist);
+      if(exist){
+        return(
+          <div key={index+item.name}>
+            {exist?<CharacterCard key={index} values={item} />:null}
+          </div>
+        )
+      }
     });
   }
 
-  function handleScroll(e) {
-    console.log('hi')
+  function handleSort(order){
+    let sortedArray = []
+    sortedArray = charsArray
+    switch (order) {
+      case 'createdAt DESC':
+        sortedArray.sort(function(a,b){
+          if (a.createdAt < b.createdAt) return -1
+          if (a.createdAt > b.createdAt) return 1
+          return 0
+        })
+        break;
+    
+      case 'createdAt ASC':
+        sortedArray.sort(function(a,b){
+          if (a.createdAt > b.createdAt) return -1
+          if (a.createdAt < b.createdAt) return 1
+          return 0
+        })
+        break;
+    
+      case 'name ASC':
+        sortedArray.sort(function(a,b){
+          if (a.name < b.name) return -1
+          if (a.name > b.name) return 1
+          return 0
+        })
+        break;
+    
+      case 'name DESC':
+        sortedArray.sort(function(a,b){
+          if (a.name > b.name) return -1
+          if (a.name < b.name) return 1
+          return 0
+        })
+        break;
+    
+      case 'level DESC':
+        sortedArray.sort(function(a,b){
+          if (a.level < b.level) return -1
+          if (a.level > b.level) return 1
+          return 0
+        })
+        break;
+    
+      case 'level ASC':
+        sortedArray.sort(function(a,b){
+          if (a.level > b.level) return -1
+          if (a.level < b.level) return 1
+          return 0
+        })
+        break;
+    
+      case 'updatedAt ASC':
+        sortedArray.sort(function(a,b){
+          if (a.updatedAt > b.updatedAt) return -1
+          if (a.updatedAt < b.updatedAt) return 1
+          return 0
+        })
+        break;
+    
+      case 'updateddAt DESC':
+        sortedArray.sort(function(a,b){
+          if (a.updatedAt < b.updatedAt) return -1
+          if (a.updatedAt > b.updatedAt) return 1
+          return 0
+        })
+        break;
+    
+      default:
+        break;
+    }
+    return sortedArray
   }
 
+  function handleScroll(e) {
+    // console.log('hi')
+  }
+  
   useEffect(()=>{
     // createCard()
     window.addEventListener('scroll',handleScroll)
@@ -79,16 +167,16 @@ const Characters = (props) => {
   
   return(
     <Container fluid={false}>
-      <div className='mt-5 d-flex justify-content-between fs-5'>
-        <h1>My characters</h1>
-        <Button ><h5 className='ps-2 pe-2'>Create a new character</h5></Button>
-      </div>
-      <div className='fs-3'>Slots: <span className='fs-3 blue'>{slots}</span></div>
-      <SearchBar test={setTest}/> 
-      {/* <CharacterCard values={values} /> */}
-      <div className='cards-container mb-5 '>
-      {createCard()}
-      </div>
+        <div className='mt-5 d-flex justify-content-between fs-5'>
+          <h1>My characters</h1>
+          <Button ><h5 className='ps-2 pe-2'>Create a new character</h5></Button>
+        </div>
+        <div className='fs-3'>Slots: <span className='fs-3 blue'>{slots}</span></div>
+        <SearchBar placeholder="Search by Name, Level, Class, Race, or Campaign" search={setSearch} sort={setSort} /> 
+        {/* <CharacterCard values={values} /> */}
+        <div className='cards-container mb-5 '>
+        {createCard()}
+        </div>
     </Container>
   )
 
