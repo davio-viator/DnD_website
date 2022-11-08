@@ -28,6 +28,7 @@ import Axios from 'axios';
 import UserIcon from './assets/images/user-icon.png'
 
 import NavBarComponent from './components/NavBarComponent';
+import CharacterCreator from './pages/CharacterCreator';
 
 
 function App() {
@@ -105,6 +106,7 @@ function App() {
           <Route path='/cards' exact element={<Cards setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/characters' exact element={<Characters setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/characters/:id' element={<CharacterView setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
+          <Route path='/character-creator' exact element={<CharacterCreator setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/deck' element={<Deck setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/deck/:id' element={<DeckView setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>
         </Routes>

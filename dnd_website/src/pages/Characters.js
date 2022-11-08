@@ -5,11 +5,14 @@ import SearchBar from '../components/SearchBar';
 import CharacterCard from '../components/CharacterCard';
 
 import randomWord from 'random-words';
+import { useNavigate } from 'react-router';
 
 const Characters = (props) => {
 
   const [search,setSearch] = useState('')
   const [sort,setSort] = useState('createdAt DESC')
+
+  const navigation = useNavigate();
 
   let charsArray = []
   let slots = 0;
@@ -152,6 +155,10 @@ const Characters = (props) => {
     return sortedArray
   }
 
+  function handleNewCharacter(){
+    navigation('/character-creator')
+  }
+
   function handleScroll(e) {
     // console.log('hi')
   }
@@ -169,7 +176,7 @@ const Characters = (props) => {
     <Container fluid={false}>
         <div className='mt-5 d-flex justify-content-between fs-5'>
           <h1>My characters</h1>
-          <Button ><h5 className='ps-2 pe-2'>Create a new character</h5></Button>
+          <Button onClick={handleNewCharacter} ><h5 className='ps-2 pe-2'>Create a new character</h5></Button>
         </div>
         <div className='fs-3'>Slots: <span className='fs-3 blue'>{slots}</span></div>
         <SearchBar placeholder="Search by Name, Level, Class, Race, or Campaign" search={setSearch} sort={setSort} /> 
