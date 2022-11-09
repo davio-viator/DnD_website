@@ -9,11 +9,12 @@ const SearchBar = (props) => {
 
   function handleSort(e){
     console.log(e.target.value);
-    props.setTest(e.target.value);
+    props.sort(e.target.value);
   }
 
   function handleSearch(e){
     console.log(e.target.value);
+    props.search(e.target.value);
   }
 
   const placeHolder = props.placeholder?props.placeholder:'Enter the name of your character'
@@ -27,9 +28,9 @@ const SearchBar = (props) => {
             <Col sm='10'><Form.Control onChange={handleSearch} type='text' placeholder={placeHolder}/></Col>}
             
             {props.submenue==undefined?(<Col>
-            <Form.Select defaultValue={'createdAt ASC'} onChange={handleSort}>
-              <option value='createdAt DESC'>Created: Newest</option>
-              <option value='createdAt ASC'>Created: Oldest</option>
+            <Form.Select defaultValue={'createdAt DESC'} onChange={handleSort}>
+              <option value='createdAt ASC'>Created: Newest</option>
+              <option value='createdAt DESC'>Created: Oldest</option>
               <option value='name ASC'>Name: A to Z</option>
               <option value='name DESC'>name: Z to A</option>
               <option value='level DESC'>Level: Low to High</option>

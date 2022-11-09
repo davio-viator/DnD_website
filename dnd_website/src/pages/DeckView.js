@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 
 import NoThumbnail from '../assets/images/no-thumbnail-image.png'
 
-import {useNavigate }  from 'react-router-dom';
+import Notes from '../components/Notes';
+
 import { useParams } from 'react-router-dom';
 
 import Notes from '../components/Notes';
@@ -60,12 +61,16 @@ const DeckView = (props) => {
     }
   }
 
+  function handleNotes(){
+    return noteVisible?<Notes id={cid}/>:null
+  }
+
+
   function createCard(){
     let cards = deck
     if(cards){
       return cards.map((item,index) => {
         return(
-          console.log(item),
           <Card key={index} 
           className="cards-container-child"
           name={item.info_level >=1?item.name:'Unknown'} 

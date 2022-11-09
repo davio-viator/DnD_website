@@ -8,7 +8,7 @@ const mysql2 = require('mysql2');
 //   database:'dnd_website'
 // })
 
-const connection = mysql.createConnection({
+const connection = mysql2.createConnection({
   host:'127.0.0.1',
   user:'root',
   password:'password',
