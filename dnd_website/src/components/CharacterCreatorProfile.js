@@ -22,8 +22,6 @@ const CharacterCreatorProfile = (props) => {
   function getRandomName(){
     setName(randomWord())
   }
-
-  console.log(props);
   
   return(
     <div className='character-creator-profile'>
