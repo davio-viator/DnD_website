@@ -9,6 +9,8 @@ import NoThumbnail from '../assets/images/no-thumbnail-image.png'
 import {useNavigate }  from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
+import Notes from '../components/Notes';
+
 
 const DeckView = (props) => {
 
@@ -17,6 +19,8 @@ const DeckView = (props) => {
   const params = useParams()
     
   const [deck,setDeck] = useState([])
+  const [noteVisible,setNoteVisible] = useState(false)
+  const [cid,setId] = useState()
 
   function getDecksCard(){
     let id = localStorage.getItem('userId')
@@ -70,11 +74,21 @@ const DeckView = (props) => {
           ecology={item.info_level >=5?item.ecology:'Unknown'}
           strenght={item.info_level >=4?item.strenght:'Unknown'} 
           weakness={item.info_level >=4?item.weakness:'Unknown'}
-          iconSrc={item.info_level >=2?item.imgSrc:NoThumbnail}/>
+          iconSrc={item.info_level >=2?item.imgSrc:NoThumbnail}
+          handleNotes={handleNotes}
+          setNoteVisibleprops={setNoteVisible}
+          setId={setId}
+          cid={cid}
+          id={item.id}/>
         )
       })
     }
   }
+
+  function handleNotes(){
+    return noteVisible?<Notes id={cid}/>:null
+  }
+
 
   useEffect(()=>{
     window.addEventListener('scroll',handleScroll)
@@ -82,8 +96,11 @@ const DeckView = (props) => {
   },[])
 
   return(
-    <div className='cards-container ps-5 ms-5 mb-5'>
-        {createCard()}
+    <div>
+      {handleNotes()}
+      <div className='cards-container ps-5 ms-5 mb-5'>
+          {createCard()}
+      </div>
     </div>
   )
 }

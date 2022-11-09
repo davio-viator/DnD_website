@@ -57,54 +57,60 @@ const SkilsBlock = (props) => {
       false
     ],
     9: [
+      'INT',
+      'Invevstigation',
+      '+0',
+      false
+    ],
+    10: [
       'WIS',
       'Medecine',
       '+6',
       true
     ],
-    10: [
+    11: [
       'INT',
       'Nature',
       '+0',
       false
     ],
-    11: [
+    12: [
       'WIS',
       'Perception',
       '+3',
       false
     ],
-    12: [
+    13: [
       'CHA',
       'Performance',
       '+1',
       false
     ],
-    13: [
+    14: [
       'CHA',
-      'Persuasioon',
+      'Persuasion',
       '+1',
       false
     ],
-    14: [
+    15: [
       'INT',
       'Religion',
       '+3',
       true
     ],
-    15: [
+    16: [
       'DEX',
       'Sleight of hands',
       '+2',
       false
     ],
-    16: [
+    17: [
       'DEX',
       'Stealth',
       '+2',
       false
     ],
-    17: [
+    18: [
       'WIS',
       'Survival',
       '+2',
@@ -116,8 +122,10 @@ const SkilsBlock = (props) => {
   function handleSkils(){
     let array = Object.entries(stats)
     return array.map((item,index) => {
+      let bonus = props.stats[props.skills[index+1].modifier].modifier
+      if(props.skills[index+1].proficient) bonus += props.proficiency
       return(
-        <Skill key={index} prof={item[1][0]} name={item[1][1]} bonus={item[1][2]} proficiency={item[1][3]} />
+        <Skill key={index} prof={props.skills[index+1].modifier} name={props.skills[index+1].skill} bonus={bonus} proficiency={props.skills[index+1].proficient} />
       )
   })
   }
@@ -132,7 +140,7 @@ const SkilsBlock = (props) => {
         <Col>bonus</Col>
       </Row>
       {handleSkils()}
-      <div style={{color: '#838383',fontSize:'12px'}} className="position-relative t-center mt-3 mb-2"><pre> </pre></div>   
+      <div style={{color: '#838383',fontSize:'12px'}} className="position-relative t-center mt-2 mb-2"><pre> </pre></div>   
       <div className="position-relative t-center mb-4 ">Skills</div>  
     </Container>
   )

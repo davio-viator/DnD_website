@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/esm/Container';
 
@@ -18,18 +18,36 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import SubStatBlock from "../components/SubStatBlock";
 import PrimaryBox from "../components/PrimaryBox";
 
+import Axios from 'axios';
+
+let statBlock 
+
 const CharacterView = (props) => {
     
     const params = useParams()
 
-    let statBlock = {
-        str:rollStats(),
-        dex:rollStats(),
-        con:rollStats(),
-        int:rollStats(),
-        wis:rollStats(),
-        cha:rollStats()
+    const [character,setCharacter] = useState({})
+
+    async function getCharacterDb(){
+        Axios.get('http://localhost:3030/get-character-db-test')
+        .then(res => {
+            localStorage.removeItem('spells')
+            localStorage.setItem('spells',JSON.stringify(res.data[0].spells))
+            setCharacter(res.data[0])
+            statBlock = {
+                str:res.data[0].stats.str.stat,
+                dex:res.data[0].stats.dex.stat,
+                con:res.data[0].stats.con.stat,
+                int:res.data[0].stats.int.stat,
+                wis:res.data[0].stats.wis.stat,
+                cha:res.data[0].stats.cha.stat
+            }
+        })
+        .catch(err =>{
+            console.error(err)
+        })
     }
+
 
     function randomMinMax(min,max){
         return Math.floor(Math.random() * (max - min +1 ))+min
@@ -75,21 +93,27 @@ const CharacterView = (props) => {
         }
     }
 
+    useEffect(()=>{
+        getCharacterDb()
+    },[])
+
     function createInfoBlock(){
+        let className = ''
+        character.substats.inspiration?className='stat-inspiration-box-checked ms-4':className='stat-inspiration-box-unchecked ms-4';
         return(
             <>
                  <Card className="stat-block-size ms-1 me-1 border-red">
                     <Card.Text className="stat-text mb-0">Proficiency</Card.Text>
-                    <Card.Title className="t-center mb-0">+{randomMinMax(2,5)}</Card.Title>
+                    <Card.Title className="t-center mb-0">+{character.substats.proficiency}</Card.Title>
                     <Card.Footer className="t-center pt-0 pb-0">Bonus</Card.Footer>
                 </Card>
                 <Card className="stat-block-size ms-1 me-1 border-red">
                     <Card.Text className="stat-text mb-0">Walking</Card.Text>
-                    <Card.Title className="t-center mb-0">30 ft.</Card.Title>
+                    <Card.Title className="t-center mb-0">{character.substats.speed} ft.</Card.Title>
                     <Card.Footer className="t-center pt-0 pb-0">Speed</Card.Footer>
                 </Card>
                 <div className="me-2 front-row">
-                    <div onClick={(e) => handleDisplay(e)} className="stat-inspiration-box-unchecked ms-4"></div>
+                    <div onClick={(e) => handleDisplay(e)} className={className}></div>
                     <div className="t-center ms-1 mt-2">Inspiration</div>
                 </div>
             </>
@@ -97,28 +121,33 @@ const CharacterView = (props) => {
     }
     
     return(
-        <div className="character-view-bg">
-            <CharacterViewHeader name='Odof' sex='Male' race='Dragonborn' class='Cleric' level={5} xp={Math.floor(Math.random()*6001)} xpToNewLevel={6000} />
-            <div className="stat-container">
-                {makeStatBlock()}
-                {createInfoBlock()}
-                <HealthBlock current={35} max={42} temp={12} />
-            </div>
-            {/* <div style={{display:'flex',flexDirection:'row',justifyItems:'start'}}> */}
-                {/* <div style={{display:'flex',flexDirection:'column'}}> */}
-                    <SavingThrowsBlock/>
-                    <Senses/>
-                    <Proficiencies />
+        <>
+        {character.substats?
+            <div className="character-view-bg">
+                <CharacterViewHeader name='Odof' sex='Male' race='Dragonborn' class='Cleric' level={5} xp={Math.floor(Math.random()*6001)} xpToNewLevel={6000} />
+                <div className="stat-container">
+                    {makeStatBlock()}
+                    {createInfoBlock()}
+                    <HealthBlock current={character.substats.current_health} max={character.substats.max_health} temp={character.substats.temp} />
+                </div>
+                {/* <div style={{display:'flex',flexDirection:'row',justifyItems:'start'}}> */}
+                    {/* <div style={{display:'flex',flexDirection:'column'}}> */}
+                        <SavingThrowsBlock values={character.saving_throws}/>
+                        <Senses values={character.stats}/>
+                        <Proficiencies />
+                    {/* </div> */}
+                    {/* <div style={{display:'flex',flexDirection:'column'}}> */}
+                        <SkilsBlock skills={character.skills} stats={character.stats} proficiency={character.substats.proficiency} />
+                    {/* </div> */}
+                    {/* <div style={{display:'flex',flexDirection:'column'}}> */}
+                        <SubStatBlock/>
+                        <PrimaryBox/>
+                    {/* </div> */}
                 {/* </div> */}
-                {/* <div style={{display:'flex',flexDirection:'column'}}> */}
-                    <SkilsBlock/>
-                {/* </div> */}
-                {/* <div style={{display:'flex',flexDirection:'column'}}> */}
-                    <SubStatBlock/>
-                    <PrimaryBox/>
-                {/* </div> */}
-            {/* </div> */}
-        </div>
+            </div>:
+            null}
+        </>
+        
 
     )
 }

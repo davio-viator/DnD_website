@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 
 const Senses = (props) => {
+
     return(
         <Container className="saving-throws border-red-saving-throw">
             <Row className="mt-4 mb-1">

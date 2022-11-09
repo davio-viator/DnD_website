@@ -49,8 +49,8 @@ const Notes = (props) => {
 
   return(
     <div className='notes'>
-      <h3 className='t-center mt-3'>Notes: <span style={{color:'red'}}>{name}</span></h3>
-      <Form.Control style={{resize:'none'}} onChange={(e)=> handleChange(e)} value={notes} as="textarea" rows={28}/>
+      <h3 className='t-center mt-3 notes-header'>Notes: <span style={{color:'red'}}>{name}</span></h3>
+      <Form.Control style={{resize:'none'}} className="notes-input" onChange={(e)=> handleChange(e)} value={notes} as="textarea" rows={28}/>
     </div>
   )
 

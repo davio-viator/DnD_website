@@ -169,7 +169,7 @@ app.post('/login',(req,res) => {
 app.get('/get-cards',(req,res) => {
   try {
     console.log(req.query)
-    connection.query(`SELECT * FROM card ORDER BY id DESC LIMIT ${req.query.limit} OFFSET ${req.query.offset}`,function(errors,rows,fields) {
+    connection.query(`SELECT * FROM card ORDER BY id LIMIT ${req.query.limit} OFFSET ${req.query.offset}`,function(errors,rows,fields) {
       if(!!errors){
         console.error('Error in the query ',errors)
         res.status(400).send(errors)

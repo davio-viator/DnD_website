@@ -8,6 +8,8 @@ import SearchBar from '../components/SearchBar';
 import Attack from '../components/Attack';
 import Spell from '../components/Spell';
 
+import Axios from 'axios';
+
 const SpellsSubPage = (props) => {
 
     const [spells,setSpells] = useState({})
@@ -20,6 +22,14 @@ const SpellsSubPage = (props) => {
         console.log(selected);
         setSelected(selected)
     }
+
+// Abstract Error Message CharCode:0 Msg:514 */
+
+/*
+Get-Content C:\logs\result.txt -Tail 10
+
+Get-Content C:\logs\result.txt -wait (monitor the tail)
+*/
 
     const header = (
         <Row style={{fontWeight:'bold',fontSize:'12px',}}>
@@ -58,6 +68,17 @@ const SpellsSubPage = (props) => {
                 </div>
             </div>
         )
+    }
+
+    async function getSpellsDb(){
+        let characterSpells = JSON.parse(localStorage.getItem('spells'))
+        setSpells(characterSpells)
+        /* Axios.get('http://localhost:3030/get-spells-db-test')
+        .then(res => {
+        })
+        .catch(err =>{
+            console.error(err)
+        }) */
     }
 
     function makeSpells(level,conc = false){
@@ -110,7 +131,7 @@ const SpellsSubPage = (props) => {
         }
         return (sizeArray.map((item,index)=>{
             return(
-                <div onClick={(e) => handleClick(e)} key={index+item} role="checkbox" aria-checked="false" aria-label="use" className="small-checkbox"></div>
+                <div onClick={(e) => handleClick(e)} key={index+item+number} role="checkbox" aria-checked="false" aria-label="use" className="small-checkbox"></div>
             )
         }))
     }
@@ -227,7 +248,7 @@ const SpellsSubPage = (props) => {
                         notes:'V/S/M'
                     },
                     3:{
-                        text:'it well',
+                        text:'at well',
                         name:'Sacred Flame',
                         item_type:'Cleric',
                         time:'1A',
@@ -339,6 +360,7 @@ const SpellsSubPage = (props) => {
             },
         ]
         // ctrl+shift+u 1 = 
+        console.log(spells,spellsArray)
         setSpells(spellsArray)
     }
 
@@ -421,7 +443,8 @@ const SpellsSubPage = (props) => {
     }
 
     useEffect(()=>{
-        initSpell()
+        getSpellsDb()
+        // initSpell()
         // test()
     },[])
 
