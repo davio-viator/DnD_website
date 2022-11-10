@@ -22,7 +22,7 @@ const SearchBar = (props) => {
   return(
     <>
       <Row style={{margin:'auto'}}>
-        <Form>
+        <Form style={props.no_padding ? {padding:'0'}:{}}>
           <Form.Group as={Row}>
             {props.icon?(<Col sm='12'><div className='spell-search-icon'></div><Form.Control className='ps-4' onChange={handleSearch} type='text' placeholder={placeHolder}/></Col>):
             <Col sm='10'><Form.Control onChange={handleSearch} type='text' placeholder={placeHolder}/></Col>}

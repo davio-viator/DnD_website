@@ -10,8 +10,6 @@ import Notes from '../components/Notes';
 
 import { useParams } from 'react-router-dom';
 
-import Notes from '../components/Notes';
-
 
 const DeckView = (props) => {
 

@@ -132,12 +132,11 @@ const CharacterIconSelector = (props) => {
 
     function displayClassTraits(){
       return Object.keys(props.values.traits).map((item,index)=>{
-        console.log(props.values.traits[item]);
-        return(
-          <DropdownItem key={index} title={item.replaceAll('_',' ')} array contenue={props.values.traits[item]} />
-        )
+        // console.log(props.values.traits[item]);
+        console.log(props.values.traits[item],Object.keys(props.values.traits[item]).length)
+        if(Object.keys(props.values.traits[item]).length>2) return <DropdownItem key={index} title={item.replaceAll('_',' ')} subtitle={props.values.traits[item].level} array contenue={props.values.traits[item]} />
+        if(Object.keys(props.values.traits[item]).length<=2) return <DropdownItem key={index} title={item.replaceAll('_',' ')} subtitle={props.values.traits[item].level} contenue={props.values.traits[item].description} />
       })
-      return <DropdownItem key={0} title="{props.values.traits[0]}" contenue="{props.values.traits[0]}" />
     }
 
   return(
