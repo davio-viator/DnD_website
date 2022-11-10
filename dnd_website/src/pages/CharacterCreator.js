@@ -1,11 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import CharacterCreatorProfile from '../components/CharacterCreatorProfile';
 import CharacterIconSelector from '../components/CharacterIconSelector';
 import ClassCard from '../components/ClassCard';
+import OptionSelector from '../components/OptionSelector';
 import RaceCard from '../components/RaceCard';
 import SearchBar from '../components/SearchBar';
+import SpellCard from '../components/SpellCard';
+import StatBlock from '../components/StatBlock';
+
+import Axios from 'axios';
 
 const CharacterCreator = (props) => {
 
@@ -15,6 +20,7 @@ const CharacterCreator = (props) => {
   const [displayedRace,setDisplayedRace] = useState(false)
   const [displayedClass,setDisplayedClass] = useState(false)
   const [searchRace,setSearchRace] = useState('')
+  const [searchClass,setSearchClass] = useState('')
   const raceSelected = useRef({})
   const classSelected = useRef({})
   
@@ -413,7 +419,7 @@ const CharacterCreator = (props) => {
       traits:{
         Rage:{
           level:'1st level',
-          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n`kik`You have advantage on Strength checks and Strength saving throws.`kik`When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.`kik`You have resistance to bludgeoning, piercing, and slashing damage.`kik`If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
+          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n^You have advantage on Strength checks and Strength saving throws.^When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.^You have resistance to bludgeoning, piercing, and slashing damage.^If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
         },
         Unarmored_Defence:{
           level:'1st level',
@@ -445,14 +451,14 @@ const CharacterCreator = (props) => {
     {
       icon:'https://www.dndbeyond.com/avatars/10/1/636336416923635770.jpeg?width=1000&height=1000&fit=bounds&quality=95&auto=webp',
       name:'Bard',
-      description:'A fierce warrior of primitive background who can enter a battle rage',
-      hit_die:'d12',
-      Primary_ability:'Strength',
-      Saves:'Strength & Constitution',
+      description:'An inspiring magician whose power echoes the music of creation',
+      hit_die:'d8',
+      Primary_ability:'Charisma',
+      Saves:'Dexterity & Charisma',
       traits:{
         Rage:{
           level:'1st level',
-          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n`kik`You have advantage on Strength checks and Strength saving throws.`kik`When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.`kik`You have resistance to bludgeoning, piercing, and slashing damage.`kik`If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
+          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n^You have advantage on Strength checks and Strength saving throws.^When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.^You have resistance to bludgeoning, piercing, and slashing damage.^If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
         },
         Unarmored_Defence:{
           level:'1st level',
@@ -491,7 +497,7 @@ const CharacterCreator = (props) => {
       traits:{
         Rage:{
           level:'1st level',
-          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n`kik`You have advantage on Strength checks and Strength saving throws.`kik`When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.`kik`You have resistance to bludgeoning, piercing, and slashing damage.`kik`If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
+          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n^You have advantage on Strength checks and Strength saving throws.^When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.^You have resistance to bludgeoning, piercing, and slashing damage.^If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
         },
         Unarmored_Defence:{
           level:'1st level',
@@ -530,7 +536,7 @@ const CharacterCreator = (props) => {
       traits:{
         Rage:{
           level:'1st level',
-          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n`kik`You have advantage on Strength checks and Strength saving throws.`kik`When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.`kik`You have resistance to bludgeoning, piercing, and slashing damage.`kik`If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
+          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n^You have advantage on Strength checks and Strength saving throws.^When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.^You have resistance to bludgeoning, piercing, and slashing damage.^If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
         },
         Unarmored_Defence:{
           level:'1st level',
@@ -569,7 +575,7 @@ const CharacterCreator = (props) => {
       traits:{
         Rage:{
           level:'1st level',
-          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n`kik`You have advantage on Strength checks and Strength saving throws.`kik`When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.`kik`You have resistance to bludgeoning, piercing, and slashing damage.`kik`If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
+          description:"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\n\n^You have advantage on Strength checks and Strength saving throws.^When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.^You have resistance to bludgeoning, piercing, and slashing damage.^If you are able to cast spells, you can’t cast them or concentrate on them while raging.\n\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n\nOnce you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again."
         },
         Unarmored_Defence:{
           level:'1st level',
@@ -600,6 +606,82 @@ const CharacterCreator = (props) => {
     },
   ]
 
+  const backgrounds= [
+    'Acolyte', 
+    'Anthropologist', 
+    'Archaeologist', 
+    'Adopted', 
+    'Black Fist Double Agent', 
+    'Caravan Specialist', 
+    'Charlatan', 
+    'City Watch', 
+    'Clan Crafter', 
+    'Cloistered Scholar', 
+    'Cormanthor Refugee', 
+    'Courtier', 
+    'Criminal', 
+    'Dissenter', 
+    'Dragon Casualty', 
+    'Earthspur Miner', 
+    'Entertainer', 
+    'Faction Agent', 
+    'Far Traveler', 
+    'Folk Hero', 
+    'Gate Urchin', 
+    'Gladiator', 
+    'Guild Artisan', 
+    'Guild Merchant', 
+    'Harborfolk', 
+    'Haunted One', 
+    'Hermit', 
+    'Hillsfar Merchant', 
+    'Hillsfar Smuggler', 
+    'House Agent', 
+    'Inheritor', 
+    'Initiate', 
+    'Inquisitor', 
+    'Investigator',  
+    'Iron Route Bandit', 
+    'Knight', 
+    'Knight of the Order', 
+    'Mercenary Veteran', 
+    'Mulmaster Aristocrat', 
+    'Noble', 
+    'Outlander', 
+    'Phlan Insurgent', 
+    'Phlan Refugee', 
+    'Pirate', 
+    'Sage', 
+    'Sailor', 
+    'Secret Identity', 
+    'Shade Fanatic', 
+    'Soldier', 
+    'Spy', 
+    'Student Of Magic', 
+    'Stojanow Prisoner', 
+    'Ticklebelly Nomad', 
+    'Trade Sheriff', 
+    'Urban Bounty Hunter', 
+    'Urchin', 
+    'Uthgardt Tribe Member', 
+    'Vizier', 
+    'Waterdhavian Noble', 
+    'D&D Gladiator Arena'
+  ];
+
+  const [spellList,setSpellList] = useState()
+
+  function getSpells(){
+    Axios.get('http://localhost:3030/get-spells')
+    .then(res=>{
+      // console.log(res.data[0]);
+      setSpellList(res.data[0])
+    })
+    .catch(err=>{
+
+    })
+  }
+
   function handleRaceSelection(value){
     raceSelected.current = value
   }
@@ -624,9 +706,63 @@ const CharacterCreator = (props) => {
   function createClasses(){
     return Object.keys(classes).map((item,index)=>{
       const current = classes[index]
-      return <ClassCard setDisplayed={setDisplayedClass} handler={() => handleClassSelection(current)} title={current.name} src={current.icon}/>
+      let exist = current.name.includes(searchClass)
+      return(<div key={index}>
+        {exist?<ClassCard setDisplayed={setDisplayedClass} handler={() => handleClassSelection(current)} title={current.name} src={current.icon}/>:null} 
+      </div>)
     })
   }
+
+  function createSpells(){
+    if(spellList ){
+      let spells= spellList.spells;
+      return Object.keys(spells).map((item,index)=>{
+        const current = spells[item]
+        return <SpellCard name={current.name}  school={current.school} properties={current.properties} contenue={current.contenue} level={current.level} tags={current.tags} />
+      })
+      let properties = {Castin_Time:'1 action',Range__Area:'60 ft',Component:'V, S',Duration:'Instantaneous',Attack__Save:'DEX'}
+      return <SpellCard name='Acid Splash' school='Conjuration' properties={properties} contenue='You hurl a bubble of acid. Choose one or two creatures you can see within range. If you choose two, they must be within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.`This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).' level='Cantrip' src='https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/conjuration.png' tags={['damage','social']} />
+    }else{
+      getSpells()
+    }
+  }
+
+  function makeModifier(value){    
+    let stat = Math.floor( (value - 10)/2 )
+    return stat<0?stat:'+'+stat
+  }
+
+  function randomMinMax(min,max){
+    return Math.floor(Math.random() * (max - min +1 ))+min
+  }
+
+  function rollStats(){
+    let rolls = []
+    for (let i = 0; i < 4; i++) {
+        rolls.push(randomMinMax(0,6))            
+    }
+    rolls = rolls.sort().filter((_,i) => i) 
+
+    return rolls.reduce((x,y) => {
+        return x+y
+    },0)
+  }
+
+  function makeStatBlock(){
+    let array = Object.keys({str:'a',dex:'a',con:'a',int:'a',wis:'a',cha:'a',})
+    return array.map((item,index) => {
+        return(
+            // console.log(item,index),
+            <StatBlock key={index} name={item} 
+            modifier={makeModifier(item)} 
+            stat={0} rolling makeModifier={makeModifier} statRolling={rollStats}/>
+        )
+    })
+  }
+
+  useEffect(()=>{
+    getSpells()
+  },[])
 
   return(
     <div>
@@ -635,16 +771,32 @@ const CharacterCreator = (props) => {
       {displayedClass?<CharacterIconSelector title="CHOOSE CLASS" values={classSelected.current} class imgsrc={src} setSource={setSrc} setDisplayed={setDisplayedClass}/>:null}
       <div style={{width:'50%',position:'absolute',left:'50%',transform:'translate(-50%,0%)'}}>
         <Container fluid={false}>
-          <CharacterCreatorProfile imgsrc={src} setDisplayed={setDisplayed}/>
+          <div style={{display:'flex'}}>
+            <CharacterCreatorProfile imgsrc={src} setDisplayed={setDisplayed}/>
+            <div style={{margin: 'auto',marginTop: '2.5em'}}>
+              <OptionSelector backgrounds={backgrounds} default='test'/>
+            </div>
+          </div>
           <br/>
+          <div style={{marginBottom:'15px',display:'flex',justifyContent:'space-evenly'}}>
+            {makeStatBlock()}
+          </div>
           <SearchBar icon no_padding submenue={false} placeholder="Select a race" search={setSearchRace} />
-          <div style={{height:'50vh',overflow:'auto'}} className='mb-5 mt-4'>
+          <div style={{height:'50vh',overflow:'auto',height:'50vh',}} className='mb-5 mt-4'>
             {createRaces()}
           </div>
-          <SearchBar icon no_padding submenue={false} placeholder="Choose a class"  />
-          <div style={{height:'50vh',overflow:'auto'}} className='mb-5 mt-4'>
+          <SearchBar icon no_padding submenue={false} placeholder="Choose a class" search={setSearchClass} />
+          <div style={{minHeight:'10vh',overflow:'auto',maxHeight:'50vh',}} className='mb-5 mt-4'>
           {createClasses()}
           </div>
+          {true?
+          <>
+            <SearchBar icon no_padding submenue={false} placeholder="Search a spell" search={setSearchClass} />
+            <div style={{minHeight:'10vh',overflow:'auto',maxHeight:'50vh',}} className='mb-5 mt-4'>
+            {createSpells()}
+            </div>
+          </>
+          :null}
         </Container>
       </div>
     </div>

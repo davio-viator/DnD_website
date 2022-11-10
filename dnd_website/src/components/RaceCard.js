@@ -12,7 +12,7 @@ const RaceCard = (props) => {
   return(
     <div onClick={() => handleCLick()} className='mt-2' style={{border:'1px solid #ccc',borderRadius:'8px',width:'98%',cursor:'pointer'}}>
       <Row className='mt-3 ms-2'>
-        <Col sm="1">
+        <Col className="me-2" sm="1">
           <img style={{height:'60px',width:'60px'}} src={props.src} alt={props.name}/>
         </Col>
         <Col>

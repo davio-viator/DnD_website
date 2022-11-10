@@ -8,17 +8,17 @@ const mysql2 = require('mysql2');
 //   database:'dnd_website'
 // })
 
-const connection = mysql2.createConnection({
-  host:'127.0.0.1',
-  user:'root',
-  password:'password',
-  database:'dnd_website'
-})
+// const connection = mysql2.createConnection({
+//   host:'127.0.0.1',
+//   user:'root',
+//   password:'password',
+//   database:'dnd_website'
+// })
 
 const pool = mysql2.createConnection({
   host:'127.0.0.1',
-  user:'root',
-  password:'password',
+  user:'admin',
+  password:'',
   database:'dnd_website',
   waitForConnections: true,
   connectionLimit: 100000,

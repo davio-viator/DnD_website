@@ -15,11 +15,10 @@ const DropdownItem = (props) => {
     // console.log(content)
     return Object.keys(content).map((item,index)=>{
       if(item!='level'){
-        console.log(item,content[item])
         return(
-          <div>
-            <span style={{fontWeight:'bold'}}>{item}: </span>
-            <span>{content[item]}</span>
+          <div key={index}>
+            <span key={item} style={{fontWeight:'bold'}}>{item}: </span>
+            <span key={index+item}>{content[item]}</span>
           </div>
         )
       }
@@ -27,15 +26,14 @@ const DropdownItem = (props) => {
   }
 
   function formatContent(content){
-    let newContent = 5
+    // console.log(content,content.split('`'));
     return content.split('\n\n').map((item,index)=>{
-      let subContent = item.split('`kik`').map((subitem,subindex)=>{
-        if(subindex>0) return <li key={subindex}>{subitem}</li>
+      let subContent = item.split('^').map((subitem,subindex)=>{
+        if(subitem.length>0) return <li key={subindex+'^'}>{subitem}</li>
       })
-      return <>{!item.includes('`kik`')?<p key={index}>{item}</p>:<ul key={index}>{subContent}</ul>}</>
+      return <div key={item+"'"}>{!item.includes('^')?<p key={index}>{item}</p>:<ul key={index}>{subContent}</ul>}</div>
     })
-    console.log(newContent)
-    // return newContent.split('`kik`').map((item,index,test)=>{
+    // return newContent.split('^').map((item,index,test)=>{
     //   return <ul key={index}>{item}</ul>
     // })
     return content

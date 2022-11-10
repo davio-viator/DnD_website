@@ -292,6 +292,23 @@ app.get('/set-notes',(req,res) => {
   }
 })
 
+app.get('/get-spells',(req,res)=>{
+  try{
+    connection.query(`SELECT spells from spells`,function(errors,rows,fields){
+      if(!!errors){
+        console.error('Error in the query ',errors)
+        res.status(400).send(errors)
+      }else{
+        console.log('Query successful')
+        res.send(rows)
+      }
+    })
+  }
+  catch(error){
+    console.log(error);
+  }
+})
+
 
 
 app.listen(3030,'0.0.0.0');

@@ -100,16 +100,14 @@ const CharacterIconSelector = (props) => {
       console.log(array.length);
       return array.map((item,index) => {
         return(
-          <div className="avatar-manager-list-item">
-            <div className="avatar-manager-list-item-inner">
-              <img onClick={(e) => handleIconClick(imgSrcArray[index])} className="avatar-manager-list-item-img" src={imgSrcArray[index]} loading="lazy" alt=""/>
+          <div key={'list-item'+index} className="avatar-manager-list-item">
+            <div key={'list-item-inner'+index} className="avatar-manager-list-item-inner">
+              <img key={index+item} onClick={(e) => handleIconClick(imgSrcArray[index])} className="avatar-manager-list-item-img" src={imgSrcArray[index]} loading="lazy" alt=""/>
             </div>
           </div>
         )
       })
     }
-
-    console.log(props);
 
     function handleConfirm(){
       props.setDisplayed(false)
@@ -132,8 +130,6 @@ const CharacterIconSelector = (props) => {
 
     function displayClassTraits(){
       return Object.keys(props.values.traits).map((item,index)=>{
-        // console.log(props.values.traits[item]);
-        console.log(props.values.traits[item],Object.keys(props.values.traits[item]).length)
         if(Object.keys(props.values.traits[item]).length>2) return <DropdownItem key={index} title={item.replaceAll('_',' ')} subtitle={props.values.traits[item].level} array contenue={props.values.traits[item]} />
         if(Object.keys(props.values.traits[item]).length<=2) return <DropdownItem key={index} title={item.replaceAll('_',' ')} subtitle={props.values.traits[item].level} contenue={props.values.traits[item].description} />
       })
