@@ -2,7 +2,7 @@ import React from 'react';
 
 const ClassCard = (props) => {
 
-  function handleCLick(){
+  function handleClick(){
     props.setDisplayed(true)
     props.handler()
   }
