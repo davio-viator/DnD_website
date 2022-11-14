@@ -294,7 +294,7 @@ app.get('/set-notes',(req,res) => {
 
 app.get('/get-spells',(req,res)=>{
   try{
-    connection.query(`SELECT spells from spells`,function(errors,rows,fields){
+    connection.query(`SELECT * from spells`,function(errors,rows,fields){
       if(!!errors){
         console.error('Error in the query ',errors)
         res.status(400).send(errors)

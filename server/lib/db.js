@@ -15,13 +15,21 @@ const mysql2 = require('mysql2');
 //   database:'dnd_website'
 // })
 
+// host:'127.0.0.1',
+//   user:'root',
+//   password:'password',
+//   database:'dnd_website',
+//   waitForConnections: true,
+//   connectionLimit: 10,
+//   queueLimit: 10
+
 const pool = mysql2.createConnection({
   host:'127.0.0.1',
-  user:'admin',
-  password:'',
+  user:'root',
+  password:'password',
   database:'dnd_website',
   waitForConnections: true,
-  connectionLimit: 100000,
+  connectionLimit: 10,
   queueLimit: 10
 })
 

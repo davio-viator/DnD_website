@@ -11,6 +11,7 @@ import Characters from './pages/Characters';
 import CharacterView from './pages/CharacterView';
 import Deck from './pages/Deck';
 import DeckView from './pages/DeckView';
+import CreateSpell from './pages/CreateSpells';
 
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -84,6 +85,7 @@ function App() {
               <Nav className="ml-auto pe-3">
                 <Link className="nav-link menulink" to="/mainpage">Main Page</Link>
                 {loggedIn?<Link className="nav-link menulink" to="/card-editor">Card Editor</Link>:null}
+                {loggedIn?<Link className="nav-link menulink" to="/spell-creator">Spell Creator</Link>:null}
                 <Link className="nav-link menulink" to="/registration">Registration</Link>
                 {loggedIn?<Link className="nav-link menulink" to="/user">{localStorage.getItem('username')}</Link>:null}
                 {!loggedIn?<Link className="nav-link menulink" to="/login">Login</Link>:<Link className="nav-link menulink" to="/logout">Logout</Link>}
@@ -100,6 +102,7 @@ function App() {
           <Route path='/mainpage' exact element={<MainPage /> }/>
           <Route path='/' exact element={<MainPage/> }/>
           <Route path='/card-editor' exact element={<CardMakerPage/> }/>
+          <Route path='/spell-creator' exact element={<CreateSpell/> }/>
           <Route path='/registration' exact element={<Registration /> }/>
           <Route path='/login' exact element={<Login  setUserIcon={setUserIcon} setLoggedIn={setLoggedIn}/> }/>
           <Route path='/logout' exact element={<Logout setUserIcon={setUserIcon} setLoggedIn={setLoggedIn} /> }/>

@@ -1568,13 +1568,44 @@ progress::-webkit-progress-value{
   transform: rotate(180deg);
 }
 
-.conjuration{
-  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/conjuration.png');
+.spells-icon{
   background-repeat: no-repeat;
   background-size: 35px 35px;
   height: 35px;
   margin-right: 5px;
   width: 35px;
+}
+
+.conjuration{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/conjuration.png');
+}
+
+.necromancy{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/necromancy.png');
+}
+
+.transmutation{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/transmutation.png');
+}
+
+.evocation{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/evocation.png');
+}
+
+.illusion{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/illusion.png');
+}
+
+.divination{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/divination.png');
+}
+
+.abjuration{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/abjuration.png');
+}
+
+.enchantment{
+  background-image: url('https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/enchantment.png');
 }
 
 .tags{

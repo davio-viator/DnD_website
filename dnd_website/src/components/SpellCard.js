@@ -75,7 +75,7 @@ const SpellCard = (props) => {
   return(
     <>
       <div onClick={(e)=>handleShowSpell(e)} className={isActive ? 'dropdown-item-header-active' : 'dropdown-item-header'} style={{alignItem:'center',display:'flex'}}>
-        <div className='conjuration'></div>
+        <div className={`spells-icon ${props.school}`}></div>
 
         <div style={{flex:'1 1',minWidth:'0'}}>
           <div>{props.name}</div>

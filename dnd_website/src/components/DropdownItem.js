@@ -43,7 +43,7 @@ const DropdownItem = (props) => {
     <div className='mt-3 mb-3'>
       <div onClick={(e) => handleClick(e)} className={isActive ? 'dropdown-item-header-active' : 'dropdown-item-header'}>
         <span>{props.title}</span>
-        <span><img className={!isActive? '':'reverse'} style={{width:'16px'}} src={arrow}/></span>
+        <span><img className={isActive? '':'reverse'} style={{width:'16px'}} src={arrow}/></span>
         {/* {props.subtitle?<>{props.subtitle}</>:null} */}
       </div>
       {isActive?
