@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/esm/Col';
@@ -12,9 +12,51 @@ const CreateSpell = (props) => {
   const firstname = 'Toll the dead'
   const default_desc = 'You point at one creature you can see within range, and the sound of a dolorous bell fills the air around it for a moment. The target must succeed on a Wisdom saving throw or take 1d8 necrotic damage. If the target is missing any of its hit points, it instead takes 1d12 necrotic damage.';
 
+  const tags = [
+  "DAMAGE",
+  "CONTROL",
+  "UTILITY",
+  "DEBUFF",
+  "COMMUNICATION",
+  "SOCIAL",
+  "FOREKNOWLEDGE",
+  "WARDING",
+  "DETECTION",
+  "SHAPECHANGING",
+  "MOVEMENT",
+  "BUFF",
+  "EXPLORATION",
+  "SUMMONING",
+  "ENVIRONEMENT",
+  "DECEPTION",
+  "CREATION",
+  "TELEPORTATIO"
+  ]
+
+  const [spellState,setSpellState] = useState(
+    {name:'',
+    level:'',
+    school:'',
+    properties:{},
+    description:'',
+    tags:[]}
+    )
+
+  function displayTags(){
+    return tags.map((item,index)=>{
+      return  <Form.Check
+      key={index}
+      inline
+      label={item}
+      name="group1"
+      type='checkbox'
+      id={`inline-${item}-1`}
+    />
+    })
+  }
+
   return(
-    <Container >
-      Creat spell works !!!
+    <Container className='mt-5'>
       <Row>
         <FormHeader title="Spell Creator Form" />
         <Form className="buttongclr registration-form ps-5 ">
@@ -89,7 +131,7 @@ const CreateSpell = (props) => {
           
           <Form.Group as={Row} className="mt-3 mb-3">
             <Form.Label column sm="2">Tags</Form.Label>
-            <Col sm="9"><Form.Control required onChange={console.log(4)} type="text" placeholder={firstname} /></Col>
+            <Col style={{display:'grid',flexDirection:'column',gridTemplateColumns: 'auto auto auto'}} sm="9">{displayTags()}</Col>
           </Form.Group>
 
           <Row className=" mt-4 mb-4 pe-3 d-flex justify-content-end">
