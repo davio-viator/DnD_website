@@ -58,7 +58,7 @@ const SpellCard = (props) => {
     return Object.keys(content).map((item,index)=>{
       return(
         <div key={item+index}>
-          <span key={item} style={{fontWeight:'bold'}}>{item}: </span><span key={index}>{content[item]}</span>
+          <span key={item} style={{fontWeight:'bold'}}>{item.replace('__','/').replace('_',' ')}: </span><span key={index}>{content[item]}</span>
         </div>
       )
     })

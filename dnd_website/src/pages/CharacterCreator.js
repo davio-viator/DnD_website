@@ -718,7 +718,7 @@ const CharacterCreator = (props) => {
       let spells= spellList;
       return Object.keys(spells).map((item,index)=>{
         const current = spells[item]
-        return <SpellCard name={current.name}  school={current.school} properties={current.properties} contenue={current.contenue} level={current.level} tags={current.tags.split(',')} />
+        return <SpellCard name={current.name}  school={current.school} properties={current.properties} contenue={current.contenue} level={current.level.replace('00','')} tags={current.tags.split(',')} />
       })
       let properties = {Castin_Time:'1 action',Range__Area:'60 ft',Component:'V, S',Duration:'Instantaneous',Attack__Save:'DEX'}
       return <SpellCard name='Acid Splash' school='Conjuration' properties={properties} contenue='You hurl a bubble of acid. Choose one or two creatures you can see within range. If you choose two, they must be within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.`This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).' level='Cantrip' src='https://www.dndbeyond.com/Content/Skins/Waterdeep/images/spell-schools/35/conjuration.png' tags={['damage','social']} />

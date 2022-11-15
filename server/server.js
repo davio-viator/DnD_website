@@ -294,7 +294,26 @@ app.get('/set-notes',(req,res) => {
 
 app.get('/get-spells',(req,res)=>{
   try{
-    connection.query(`SELECT * from spells`,function(errors,rows,fields){
+    connection.query(`SELECT * from spells ORDER BY level,name`,function(errors,rows,fields){
+      if(!!errors){
+        console.error('Error in the query ',errors)
+        res.status(400).send(errors)
+      }else{
+        console.log('Query successful')
+        res.send(rows)
+      }
+    })
+  }
+  catch(error){
+    console.log(error);
+  }
+})
+
+app.post('/insert-spell',(req,res)=>{
+  let properties = JSON.stringify(req.body.properties)
+  console.log(properties)
+  try{
+    connection.query(`INSERT INTO spells (LEVEL,NAME,school,properties,contenue,tags) VALUES(?,?,?,?,?,?)`,[req.body.level,req.body.name,req.body.school,properties,req.body.description,req.body.tags.join()],function(errors,rows,fields){
       if(!!errors){
         console.error('Error in the query ',errors)
         res.status(400).send(errors)
